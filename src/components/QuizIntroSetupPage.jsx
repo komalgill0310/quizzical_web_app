@@ -1,9 +1,9 @@
 import React from "react";
-import { useId } from "react";
+// import { useId } from "react";
 
 export default function QuizIntroSetupPage() {
-  const quizSelectedId = useId();
-  const quizDifficultyLevelId = useId();
+  // const quizSelectedId = useId();
+  // const quizDifficultyLevelId = useId();
   return (
     <div className="quiz-setup-container">
       <h1>Quizzical</h1>
@@ -14,12 +14,8 @@ export default function QuizIntroSetupPage() {
       </p>
 
       {/* below html for quiz topic */}
-      <label htmlFor={quizSelectedId}>Choose Quiz Topic: </label>
-      <select
-        name="selctedQuizId"
-        id="selected-quiz-id"
-        defaultValue="Choose one"
-      >
+      <label htmlFor="selected-quiz-id">Choose Quiz Topic: </label>
+      <select name="quizId" id="quiz-id" defaultValue="Choose one">
         <option disabled value="Choose one">
           Choose one
         </option>
@@ -33,10 +29,10 @@ export default function QuizIntroSetupPage() {
       </select>
 
       {/* below html for quiz difficulty level */}
-      <label htmlFor={quizDifficultyLevelId}>Choose Quiz Topic: </label>
+      <label htmlFor="quiz-difficulty-level-id">Choose Quiz Topic: </label>
       <select
-        name="selctedQuizDifficultyLevelId"
-        id="selected-quiz-difficulty-level-id"
+        name="quizDifficultyLevelId"
+        id="quiz-difficulty-level-id"
         defaultValue="Choose one"
       >
         <option disabled value="Choose one">

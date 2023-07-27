@@ -1,9 +1,22 @@
-import React from "react";
-// import { useId } from "react";
+import React, { useState } from "react";
 
 export default function QuizIntroSetupPage() {
-  // const quizSelectedId = useId();
-  // const quizDifficultyLevelId = useId();
+  const [quizSelections, setQuizSelections] = useState({
+    quizTopic: "",
+    quizDifficultyLevel: "",
+  });
+
+  function handleChange(event) {
+    setQuizSelections((prevSelections) => ({
+      ...prevSelections,
+      [event.target.name]: event.target.value,
+    }));
+  }
+
+  function handleClick() {
+    console.log("formData: ", quizSelections);
+  }
+
   return (
     <div className="quiz-setup-container">
       <h1>Quizzical</h1>
@@ -13,9 +26,14 @@ export default function QuizIntroSetupPage() {
         Choose Your Challenge, and Conquer the Thrills of Learning! 🚀
       </p>
 
-      {/* below html for quiz topic */}
-      <label htmlFor="selected-quiz-id">Choose Quiz Topic: </label>
-      <select name="quizId" id="quiz-id" defaultValue="Choose one">
+      {/* Below HTML for quiz topic */}
+      <label htmlFor="selected-quiz-id">Select Topic: </label>
+      <select
+        name="quizTopic"
+        id="quiz-id"
+        onChange={handleChange}
+        defaultValue="Choose one"
+      >
         <option disabled value="Choose one">
           Choose one
         </option>
@@ -28,11 +46,12 @@ export default function QuizIntroSetupPage() {
         <option value="32">Entertainment: Cartoon & Animations</option>
       </select>
 
-      {/* below html for quiz difficulty level */}
-      <label htmlFor="quiz-difficulty-level-id">Choose Quiz Topic: </label>
+      {/* Below HTML for quiz difficulty level */}
+      <label htmlFor="quiz-difficulty-level-id">Select Quiz Difficulty: </label>
       <select
-        name="quizDifficultyLevelId"
+        name="quizDifficultyLevel"
         id="quiz-difficulty-level-id"
+        onChange={handleChange}
         defaultValue="Choose one"
       >
         <option disabled value="Choose one">
@@ -43,8 +62,8 @@ export default function QuizIntroSetupPage() {
         <option value="hard">Hard</option>
       </select>
 
-      {/* button to begin the quiz */}
-      <button className="btn-start-quiz" type="button">
+      {/* button to Start the quiz */}
+      <button className="btn-start-quiz" type="button" onClick={handleClick}>
         Start Quiz
       </button>
     </div>

@@ -1,19 +1,35 @@
-import React from "react";
+import React, { useState } from "react";
 import { nanoid } from "nanoid";
 import { decode } from "html-entities";
 
 export default function Answers(props) {
   const { answers } = props;
 
+  const [selectedAns, setSelectedAns] = useState("");
+
+  console.log("selected: ", selectedAns);
+  function handleChange(e) {
+    const { checked } = e.target;
+    console.log("event: ", checked);
+    setSelectedAns(e.target.value);
+  }
+
   const answerElements = answers.map((answer) => {
-    const decodeAnswer = decode(answer);
+    const decodedAns = decode(answer);
     return (
       <div key={nanoid()}>
-        <input type="radio" id={decodeAnswer} />
-        <label htmlFor={decodeAnswer}>{decodeAnswer}</label>
+        <input
+          type="radio"
+          id={decodedAns}
+          name={decodedAns}
+          value={decodedAns}
+          checked={selectedAns === decodedAns}
+          onChange={handleChange}
+        />
+        <label htmlFor={decodedAns}>{decodedAns}</label>
       </div>
     );
   });
 
-  return <fieldset>{answerElements}</fieldset>;
+  return <div>{answerElements}</div>;
 }

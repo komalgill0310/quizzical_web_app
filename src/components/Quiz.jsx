@@ -10,14 +10,16 @@ export default function Quiz(props) {
   const { category, difficulty } = quiz[0];
 
   const quizData = quiz.map((eachQuizData, index) => {
-    const { question } = eachQuizData;
-
+    const { question, correct_answer, incorrect_answers } = eachQuizData;
+    const randomIndex = Math.floor(Math.random() * 4);
+    const answers = incorrect_answers.toSpliced(randomIndex, 0, correct_answer);
     return (
       <QuizHtml
         key={nanoid()}
         id={nanoid()}
         questionNumber={index + 1}
-        question={decode(question)}
+        question={question}
+        answers={answers}
       />
     );
   });

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 
-export default function QuizIntroSetupPage() {
+export default function QuizIntroSetupPage(props) {
+  const { setQuiz } = props;
   const [quizSelections, setQuizSelections] = useState({
     quizTopic: "",
     quizDifficultyLevel: "",
@@ -13,8 +14,18 @@ export default function QuizIntroSetupPage() {
     }));
   }
 
-  function handleClick() {
-    console.log("formData: ", quizSelections);
+  async function handleClick() {
+    const { quizTopic, quizDifficultyLevel } = quizSelections;
+    if (quizTopic && quizDifficultyLevel) {
+      const res = await fetch(
+        `https://opentdb.com/api.php?amount=5&category=${quizTopic}&difficulty=${quizDifficultyLevel}&type=multiple`
+      );
+      const data = await res.json();
+      console.log("data is: ", data.results);
+      setQuiz(data.results);
+    } else {
+      alert("Please select topic and difficulty level");
+    }
   }
 
   return (

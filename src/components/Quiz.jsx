@@ -29,6 +29,10 @@ export default function Quiz(props) {
       <h3>Category: {category}</h3>
       <h3>Level: {difficulty}</h3>
       {quizData}
+      <br />
+      <br />
+      <br />
+      <button>Check Answers</button>
     </div>
   );
 }

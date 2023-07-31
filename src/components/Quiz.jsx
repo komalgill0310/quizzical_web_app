@@ -5,12 +5,13 @@ import QuizHtml from "./QuizHtml";
 
 export default function Quiz(props) {
   const { quiz } = props;
+  const totalAnswers = 4;
 
   const { category, difficulty } = quiz[0];
 
   const quizData = quiz.map((eachQuizData, index) => {
     const { question, correct_answer, incorrect_answers } = eachQuizData;
-    const randomIndex = Math.floor(Math.random() * 4);
+    const randomIndex = Math.floor(Math.random() * totalAnswers);
     const answers = incorrect_answers.toSpliced(randomIndex, 0, correct_answer);
     return (
       <QuizHtml

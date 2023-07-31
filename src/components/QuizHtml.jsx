@@ -4,7 +4,6 @@ import Answer from "./Answer";
 
 export default function QuizHtml(props) {
   const { id, questionNumber, question, answers } = props;
-  console.log("answers: ", answers);
 
   return (
     <div>

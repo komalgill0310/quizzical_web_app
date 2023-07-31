@@ -1,27 +1,19 @@
 import React from "react";
+import { nanoid } from "nanoid";
+import { decode } from "html-entities";
 
 export default function Answers(props) {
   const { answers } = props;
-  console.log("answers: ", answers);
 
-  // const answerArr = answers.map(
-  //   (answer) => `<input type="radio" id=${answer} />
-  // <label htmlFor=${answer}>${answer}</label>`
-  // );
+  const answerElements = answers.map((answer) => {
+    const decodeAnswer = decode(answer);
+    return (
+      <div key={nanoid()}>
+        <input type="radio" id={decodeAnswer} />
+        <label htmlFor={decodeAnswer}>{decodeAnswer}</label>
+      </div>
+    );
+  });
 
-  return (
-    <fieldset>
-      <input type="radio" id={answers[0]} />
-      <label htmlFor={answers[0]}>{answers[0]}</label>
-
-      <input type="radio" id={answers[1]} />
-      <label htmlFor={answers[1]}>{answers[1]}</label>
-
-      <input type="radio" id={answers[2]} />
-      <label htmlFor={answers[2]}>{answers[2]}</label>
-
-      <input type="radio" id={answers[3]} />
-      <label htmlFor={answers[3]}>{answers[3]}</label>
-    </fieldset>
-  );
+  return <fieldset>{answerElements}</fieldset>;
 }

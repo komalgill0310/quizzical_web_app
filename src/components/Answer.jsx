@@ -7,10 +7,8 @@ export default function Answers(props) {
 
   const [selectedAns, setSelectedAns] = useState("");
 
-  console.log("selected: ", selectedAns);
   function handleChange(e) {
     const { checked } = e.target;
-    console.log("event: ", checked);
     setSelectedAns(e.target.value);
   }
 

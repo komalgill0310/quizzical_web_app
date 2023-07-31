@@ -9,6 +9,10 @@ export default function Quiz(props) {
 
   const { category, difficulty } = quiz[0];
 
+  function handleClick() {
+    console.log("I will check your quiz!");
+  }
+
   const quizData = quiz.map((eachQuizData, index) => {
     const { question, correct_answer, incorrect_answers } = eachQuizData;
     const randomIndex = Math.floor(Math.random() * totalAnswers);
@@ -32,7 +36,7 @@ export default function Quiz(props) {
       <br />
       <br />
       <br />
-      <button>Check Answers</button>
+      <button onClick={handleClick}>Check Answers</button>
     </div>
   );
 }

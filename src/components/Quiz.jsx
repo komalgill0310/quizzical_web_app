@@ -17,14 +17,8 @@ export default function Quiz(props) {
   }
 
   useEffect(() => {
-    updateCorrectAnswers(quiz);
+    setCorrectAnswers(quiz.map((data) => data.correct_answer));
   }, []);
-
-  function updateCorrectAnswers(quiz) {
-    setCorrectAnswers((_) => {
-      return quiz.map((data) => data.correct_answer);
-    });
-  }
 
   const quizData = quiz.map((eachQuizData, index) => {
     const { question, correct_answer, incorrect_answers } = eachQuizData;

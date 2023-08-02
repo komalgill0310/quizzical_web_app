@@ -8,7 +8,7 @@ export default function Answers(props) {
   const [selectedAns, setSelectedAns] = useState("");
 
   function handleChange(e) {
-    const { checked } = e.target;
+    console.log("id: ", e.target.id);
     setSelectedAns(e.target.value);
   }
 

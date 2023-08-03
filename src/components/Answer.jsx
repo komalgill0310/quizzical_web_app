@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { nanoid } from "nanoid";
-import { decode } from "html-entities";
 
 export default function Answers(props) {
   const { answers } = props;
@@ -9,25 +8,27 @@ export default function Answers(props) {
 
   function handleChange(e) {
     console.log("id: ", e.target.id);
+    //HOW TO STORE THE SELECTED ANSWER AT THE SPECIFIC LOCATION?
     setSelectedAns(e.target.value);
   }
 
   const answerElements = answers.map((answer) => {
-    const decodedAns = decode(answer);
     return (
       <div key={nanoid()}>
         <input
           type="radio"
-          id={decodedAns}
-          name={decodedAns}
-          value={decodedAns}
-          checked={selectedAns === decodedAns}
+          id={answer}
+          name={answer}
+          value={answer}
+          checked={selectedAns === answer}
           onChange={handleChange}
         />
-        <label htmlFor={decodedAns}>{decodedAns}</label>
+        <label htmlFor={answer}>{answer}</label>
       </div>
     );
   });
+
+  console.log("ele: ", answerElements);
 
   return <div>{answerElements}</div>;
 }

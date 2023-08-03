@@ -1,5 +1,4 @@
 import React from "react";
-import { decode } from "html-entities";
 import Answer from "./Answer";
 
 export default function QuizHtml(props) {
@@ -8,7 +7,7 @@ export default function QuizHtml(props) {
   return (
     <div>
       <h5>
-        {questionNumber}. {decode(question)}
+        {questionNumber}. {question}
       </h5>
       <Answer answers={answers} />
     </div>

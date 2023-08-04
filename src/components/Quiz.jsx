@@ -9,15 +9,17 @@ export default function Quiz(props) {
 
   const { category, difficulty } = quiz[0];
 
-  const [quizData, setQuizData] = useState(quiz);
+  const [quizData, setQuizData] = useState([]);
+
+  const [selectedAns, setSelectedAns] = useState([]);
 
   function handleClick() {
     console.log("I will check your quiz!");
   }
 
   function updateQuizData(quiz) {
-    setQuizData(
-      quiz.map((data, index) => {
+    setQuizData(() => {
+      return quiz.map((data, index) => {
         const randomIndex = createRandomNumber();
         const answers = data.incorrect_answers.toSpliced(
           randomIndex,
@@ -26,13 +28,13 @@ export default function Quiz(props) {
         );
         return {
           ...data,
-          id: index + 1,
+          id: index,
           question: decode(data.question),
           answers: answers.map((answer) => decode(answer)),
           correct_answer: decode(data.correct_answer),
         };
-      })
-    );
+      });
+    });
   }
 
   useEffect(() => {
@@ -43,16 +45,17 @@ export default function Quiz(props) {
     return Math.floor(Math.random() * totalAnswers);
   }
 
-  const quizDataWhole = quizData.map((eachQuizData) => {
+  const quizElements = quizData.map((eachQuizData) => {
     const { id, question, answers } = eachQuizData;
-    console.log(eachQuizData);
     return (
       <QuizHtml
         key={nanoid()}
         id={id}
-        questionNumber={id}
+        questionNumber={id + 1}
         question={question}
         answers={answers}
+        selectedAns={selectedAns}
+        setSelectedAns={setSelectedAns}
       />
     );
   });
@@ -61,7 +64,7 @@ export default function Quiz(props) {
     <div>
       <h3>Category: {category}</h3>
       <h3>Level: {difficulty}</h3>
-      {quizDataWhole}
+      {quizElements}
       <br />
       <button onClick={handleClick}>Check Answers</button>
     </div>

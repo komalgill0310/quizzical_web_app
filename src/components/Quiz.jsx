@@ -14,7 +14,16 @@ export default function Quiz(props) {
   const [selectedAns, setSelectedAns] = useState([]);
 
   function handleClick() {
-    console.log("I will check your quiz!");
+    // console.log("I will check your quiz!");
+    for (let i = 0; i < selectedAns.length; i++) {
+      const { correct_answer } = quizData[i];
+      const current_answer = selectedAns[i];
+      if (current_answer === correct_answer) {
+        console.log("you got correct answer!", current_answer);
+      } else {
+        console.log("Better luck next time");
+      }
+    }
   }
 
   function updateQuizData(quiz) {

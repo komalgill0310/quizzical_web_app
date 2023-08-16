@@ -13,16 +13,24 @@ export default function Quiz(props) {
 
   const [selectedAns, setSelectedAns] = useState([]);
 
+  // const [selectedAns, setSelectedAns] = useState(quizData.answers);
+
+  console.log("quizData: ", selectedAns);
+
   function handleClick() {
     // console.log("I will check your quiz!");
+    console.log(selectedAns);
     for (let i = 0; i < selectedAns.length; i++) {
       const { correct_answer } = quizData[i];
       const current_answer = selectedAns[i];
-      if (current_answer === correct_answer) {
-        console.log("you got correct answer!", current_answer);
-      } else {
-        console.log("Better luck next time");
-      }
+      // const styles = {
+      //   backgroundColor: current_answer === correct_answer ? "green" : current_answer === "undefined" ?
+      // }
+      // if (current_answer === correct_answer) {
+      //   console.log("you got correct answer!", current_answer);
+      // } else {
+      //   console.log("Better luck next time");
+      // }
     }
   }
 
@@ -39,7 +47,10 @@ export default function Quiz(props) {
           ...data,
           id: index,
           question: decode(data.question),
-          answers: answers.map((answer) => decode(answer)),
+          answers: answers.map((answer) => ({
+            ans: decode(answer),
+            isSelected: false,
+          })),
           correct_answer: decode(data.correct_answer),
         };
       });
@@ -56,6 +67,7 @@ export default function Quiz(props) {
 
   const quizElements = quizData.map((eachQuizData) => {
     const { id, question, answers } = eachQuizData;
+    // console.log("answers: ", answers);
     return (
       <QuizHtml
         key={nanoid()}

@@ -4,30 +4,33 @@ import { nanoid } from "nanoid";
 export default function Answers(props) {
   const { question, answerLocation, answers, selectedAns, setSelectedAns } =
     props;
+  // console.log("answerLocation: ", answerLocation);
 
   function handleChange(e) {
-    console.log("name: ", e.target.name);
     setSelectedAns((prevState) => {
       const newArr = [...prevState];
-      newArr[answerLocation] = e.target.value;
-      console.log("update State: ", newArr);
+      newArr[answerLocation] = {
+        ans: e.target.value,
+        isSelected: true,
+      };
       return newArr;
     });
   }
 
-  const answerElements = answers.map((answer) => {
+  const answerElements = answers.map((answerObj, i) => {
     const inputId = nanoid();
+    const { ans } = answerObj;
     return (
       <div key={nanoid()}>
         <input
           type="radio"
           id={inputId}
           name={question}
-          value={answer}
-          checked={selectedAns[answerLocation] === answer}
+          value={ans}
+          checked={selectedAns[answerLocation]?.ans === ans}
           onChange={handleChange}
         />
-        <label htmlFor={answer}>{answer}</label>
+        <label htmlFor={inputId}>{answerObj.ans}</label>
       </div>
     );
   });

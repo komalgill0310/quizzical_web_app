@@ -11,27 +11,33 @@ export default function Quiz(props) {
 
   const [quizData, setQuizData] = useState([]);
 
+  // const [selectedAns, setSelectedAns] = useState([]);
   const [selectedAns, setSelectedAns] = useState([]);
 
-  // const [selectedAns, setSelectedAns] = useState(quizData.answers);
-
-  console.log("quizData: ", selectedAns);
+  console.log("selectedAns: ", selectedAns);
 
   function handleClick() {
-    // console.log("I will check your quiz!");
-    console.log(selectedAns);
-    for (let i = 0; i < selectedAns.length; i++) {
+    // if (!selectedAns.length) {
+    //   setSelectedAns(() => {
+    //     return quizData.answers.map((_,i) => {
+    //       ans: quizData[i].correct_answer,
+    //       isSelectedCorrect: true,
+    //     })
+    //   })
+    // }
+    const updatedSelectedAns = selectedAns.map((answerObj, i) => {
       const { correct_answer } = quizData[i];
-      const current_answer = selectedAns[i];
-      // const styles = {
-      //   backgroundColor: current_answer === correct_answer ? "green" : current_answer === "undefined" ?
-      // }
-      // if (current_answer === correct_answer) {
-      //   console.log("you got correct answer!", current_answer);
-      // } else {
-      //   console.log("Better luck next time");
-      // }
-    }
+      // console.log("handleClick: ", answerObj);
+      const { ans } = answerObj;
+      const isSelectedCorrect = ans === correct_answer ? true : false;
+      return {
+        ...answerObj,
+        isSelectedCorrect: isSelectedCorrect,
+      };
+
+      // Case: if user does not select any of the answer:
+    });
+    setSelectedAns(updatedSelectedAns);
   }
 
   function updateQuizData(quiz) {
@@ -49,7 +55,7 @@ export default function Quiz(props) {
           question: decode(data.question),
           answers: answers.map((answer) => ({
             ans: decode(answer),
-            isSelected: false,
+            // isSelected: false,
           })),
           correct_answer: decode(data.correct_answer),
         };
@@ -61,13 +67,18 @@ export default function Quiz(props) {
     updateQuizData(quiz);
   }, []);
 
+  // useEffect(() => {
+  //   const answerObjectsArr = [];
+  //   quizData.forEach((data) => answerObjectsArr.push(data.answers));
+  //   setSelectedAns(answerObjectsArr);
+  // }, [quizData]);
+
   function createRandomNumber() {
     return Math.floor(Math.random() * totalAnswers);
   }
 
   const quizElements = quizData.map((eachQuizData) => {
     const { id, question, answers } = eachQuizData;
-    // console.log("answers: ", answers);
     return (
       <QuizHtml
         key={nanoid()}

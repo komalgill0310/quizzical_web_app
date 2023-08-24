@@ -11,34 +11,20 @@ export default function Quiz(props) {
 
   const [quizData, setQuizData] = useState([]);
 
-  // const [selectedAns, setSelectedAns] = useState([]);
   const [selectedAns, setSelectedAns] = useState([]);
 
-  console.log("selectedAns: ", selectedAns);
-
-  function handleClick() {
-    // if (!selectedAns.length) {
-    //   setSelectedAns(() => {
-    //     return quizData.answers.map((_,i) => {
-    //       ans: quizData[i].correct_answer,
-    //       isSelectedCorrect: true,
-    //     })
-    //   })
-    // }
-    const updatedSelectedAns = selectedAns.map((answerObj, i) => {
-      const { correct_answer } = quizData[i];
-      // console.log("handleClick: ", answerObj);
-      const { ans } = answerObj;
-      const isSelectedCorrect = ans === correct_answer ? true : false;
-      return {
-        ...answerObj,
-        isSelectedCorrect: isSelectedCorrect,
-      };
-
-      // Case: if user does not select any of the answer:
-    });
-    setSelectedAns(updatedSelectedAns);
-  }
+  // BELOW FUNCTION NEEDS TO UPDATE IN ORDER TO DISPLAY THE BACKGROUND COLOR FOR EACH QUESTION'S CORRECT AND INCORRECT ANSWER
+  // function handleClick() {
+  //   const updatedSelectedAns = selectedAns.map((answerObj, i) => {
+  //     const { correct_answer } = quizData[i];
+  //     const { ans } = answerObj;
+  //     return {
+  //       ...answerObj,
+  //       correct_answer: correct_answer,
+  //     };
+  //   });
+  //   setSelectedAns(updatedSelectedAns);
+  // }
 
   function updateQuizData(quiz) {
     setQuizData(() => {
@@ -55,7 +41,7 @@ export default function Quiz(props) {
           question: decode(data.question),
           answers: answers.map((answer) => ({
             ans: decode(answer),
-            // isSelected: false,
+            isSelected: false,
           })),
           correct_answer: decode(data.correct_answer),
         };
@@ -67,11 +53,13 @@ export default function Quiz(props) {
     updateQuizData(quiz);
   }, []);
 
-  // useEffect(() => {
-  //   const answerObjectsArr = [];
-  //   quizData.forEach((data) => answerObjectsArr.push(data.answers));
-  //   setSelectedAns(answerObjectsArr);
-  // }, [quizData]);
+  useEffect(() => {
+    setSelectedAns(() => {
+      const answers = [];
+      quizData.map((data) => answers.push(data.answers));
+      return answers;
+    });
+  }, [quizData]);
 
   function createRandomNumber() {
     return Math.floor(Math.random() * totalAnswers);
@@ -98,7 +86,8 @@ export default function Quiz(props) {
       <h3>Level: {difficulty}</h3>
       {quizElements}
       <br />
-      <button onClick={handleClick}>Check Answers</button>
+      <button>Check Answers</button>
+      {/* <button onClick={handleClick}>Check Answers</button> */}
     </div>
   );
 }

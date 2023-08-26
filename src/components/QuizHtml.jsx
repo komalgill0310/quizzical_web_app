@@ -2,8 +2,15 @@ import React from "react";
 import Answer from "./Answer";
 
 export default function QuizHtml(props) {
-  const { id, questionNumber, question, answers, selectedAns, setSelectedAns } =
-    props;
+  const {
+    id,
+    questionNumber,
+    question,
+    answers,
+    isCheckAnswersBtnClicked,
+    selectedAns,
+    setSelectedAns,
+  } = props;
   return (
     <div>
       <h5>
@@ -15,6 +22,7 @@ export default function QuizHtml(props) {
         question={question}
         selectedAns={selectedAns}
         setSelectedAns={setSelectedAns}
+        isCheckAnswersBtnClicked={isCheckAnswersBtnClicked}
       />
     </div>
   );

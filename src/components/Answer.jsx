@@ -2,8 +2,14 @@ import React from "react";
 import { nanoid } from "nanoid";
 
 export default function Answers(props) {
-  const { question, answerLocation, answers, selectedAns, setSelectedAns } =
-    props;
+  const {
+    question,
+    answerLocation,
+    answers,
+    selectedAns,
+    setSelectedAns,
+    isCheckAnswersBtnClicked,
+  } = props;
 
   function handleChange(e, i) {
     setSelectedAns((prevState) => {
@@ -24,9 +30,29 @@ export default function Answers(props) {
     });
   }
 
+  function addBackgroundColor() {
+    let color = [];
+    selectedAns.map((answerArr, i) => {
+      answerArr.map((answerObj) => {
+        const { isSelected, isCorrect } = answerObj;
+        if (isSelected && isCorrect) {
+          color.push(["green", i]);
+        } else if (!isSelected && isCorrect) {
+          color.push(["green", i]);
+        } else if (isSelected && !isCorrect) {
+          color.push(["red", i]);
+        }
+      });
+    });
+    console.log(color);
+  }
+
   const answerElements = answers.map((answerObj, i) => {
     const inputId = nanoid();
     const { ans } = answerObj;
+    if (isCheckAnswersBtnClicked) {
+      addBackgroundColor();
+    }
     return (
       <div key={nanoid()}>
         <input

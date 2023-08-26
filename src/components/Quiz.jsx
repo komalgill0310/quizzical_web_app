@@ -14,8 +14,12 @@ export default function Quiz(props) {
   const [selectedAns, setSelectedAns] = useState([]);
   console.log("updated: ", selectedAns);
 
+  const [isCheckAnswersBtnClicked, setIsCheckAnswersBtnClicked] =
+    useState(false);
+
   // BELOW FUNCTION NEEDS TO UPDATE IN ORDER TO DISPLAY THE BACKGROUND COLOR FOR EACH QUESTION'S CORRECT AND INCORRECT ANSWER
   function handleClick() {
+    setIsCheckAnswersBtnClicked((prevState) => !prevState);
     setSelectedAns((prevState) => {
       return prevState.map((answerArr, i) => {
         const { correct_answer } = quizData[i];
@@ -82,6 +86,7 @@ export default function Quiz(props) {
         questionNumber={id + 1}
         question={question}
         answers={answers}
+        isCheckAnswersBtnClicked={isCheckAnswersBtnClicked}
         selectedAns={selectedAns}
         setSelectedAns={setSelectedAns}
       />

@@ -10,7 +10,6 @@ export default function Answers(props) {
       const updatedSelectedAns = prevState.map((questionAnswers, index) => {
         if (answerLocation === index) {
           return questionAnswers.map((answerObj, eachAnswerIndex) => {
-            console.log("checking index: ", eachAnswerIndex, i);
             if (eachAnswerIndex === i) {
               return { ...answerObj, isSelected: true };
             } else {
@@ -21,7 +20,6 @@ export default function Answers(props) {
           return questionAnswers;
         }
       });
-      console.log("updated: ", updatedSelectedAns);
       return updatedSelectedAns;
     });
   }

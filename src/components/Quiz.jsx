@@ -12,19 +12,26 @@ export default function Quiz(props) {
   const [quizData, setQuizData] = useState([]);
 
   const [selectedAns, setSelectedAns] = useState([]);
+  console.log("updated: ", selectedAns);
 
   // BELOW FUNCTION NEEDS TO UPDATE IN ORDER TO DISPLAY THE BACKGROUND COLOR FOR EACH QUESTION'S CORRECT AND INCORRECT ANSWER
-  // function handleClick() {
-  //   const updatedSelectedAns = selectedAns.map((answerObj, i) => {
-  //     const { correct_answer } = quizData[i];
-  //     const { ans } = answerObj;
-  //     return {
-  //       ...answerObj,
-  //       correct_answer: correct_answer,
-  //     };
-  //   });
-  //   setSelectedAns(updatedSelectedAns);
-  // }
+  function handleClick() {
+    setSelectedAns((prevState) => {
+      return prevState.map((answerArr, i) => {
+        const { correct_answer } = quizData[i];
+        return answerArr.map((answerObj) => {
+          const { ans, isSelected } = answerObj;
+          if (isSelected && ans === correct_answer) {
+            return { ...answerObj, isCorrect: true };
+          } else if (!isSelected && ans === correct_answer) {
+            return { ...answerObj, isCorrect: true };
+          } else {
+            return { ...answerObj };
+          }
+        });
+      });
+    });
+  }
 
   function updateQuizData(quiz) {
     setQuizData(() => {
@@ -42,6 +49,7 @@ export default function Quiz(props) {
           answers: answers.map((answer) => ({
             ans: decode(answer),
             isSelected: false,
+            isCorrect: false,
           })),
           correct_answer: decode(data.correct_answer),
         };
@@ -86,8 +94,8 @@ export default function Quiz(props) {
       <h3>Level: {difficulty}</h3>
       {quizElements}
       <br />
-      <button>Check Answers</button>
-      {/* <button onClick={handleClick}>Check Answers</button> */}
+      {/* <button>Check Answers</button> */}
+      <button onClick={handleClick}>Check Answers</button>
     </div>
   );
 }

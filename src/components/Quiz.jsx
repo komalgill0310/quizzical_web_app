@@ -11,8 +11,7 @@ export default function Quiz(props) {
 
   const [quizData, setQuizData] = useState([]);
 
-  const [selectedAns, setSelectedAns] = useState([]);
-  console.log("updated: ", selectedAns);
+  console.log("quizData: ", quizData);
 
   const [isCheckAnswersBtnClicked, setIsCheckAnswersBtnClicked] =
     useState(false);
@@ -20,20 +19,24 @@ export default function Quiz(props) {
   // BELOW FUNCTION NEEDS TO UPDATE IN ORDER TO DISPLAY THE BACKGROUND COLOR FOR EACH QUESTION'S CORRECT AND INCORRECT ANSWER
   function handleClick() {
     setIsCheckAnswersBtnClicked((prevState) => !prevState);
-    setSelectedAns((prevState) => {
-      return prevState.map((answerArr, i) => {
+
+    setQuizData((prevState) => {
+      const updatedQuizAnswers = prevState.map((data, i) => {
         const { correct_answer } = quizData[i];
-        return answerArr.map((answerObj) => {
+        const answersArr = quizData[i]["answers"];
+        const updatedAnswersArr = answersArr.map((answerObj) => {
           const { ans, isSelected } = answerObj;
-          if (isSelected && ans === correct_answer) {
-            return { ...answerObj, isCorrect: true };
-          } else if (!isSelected && ans === correct_answer) {
-            return { ...answerObj, isCorrect: true };
+          if ((isSelected || !isSelected) && ans === correct_answer) {
+            return { ...answerObj, isCorrect: true, backgroundColor: "green" };
+          } else if (isSelected && ans != correct_answer) {
+            return { ...answerObj, backgroundColor: "red" };
           } else {
             return { ...answerObj };
           }
         });
+        return { ...data, answers: updatedAnswersArr };
       });
+      return updatedQuizAnswers;
     });
   }
 
@@ -54,6 +57,7 @@ export default function Quiz(props) {
             ans: decode(answer),
             isSelected: false,
             isCorrect: false,
+            backgroundColor: "",
           })),
           correct_answer: decode(data.correct_answer),
         };
@@ -64,14 +68,6 @@ export default function Quiz(props) {
   useEffect(() => {
     updateQuizData(quiz);
   }, []);
-
-  useEffect(() => {
-    setSelectedAns(() => {
-      const answers = [];
-      quizData.map((data) => answers.push(data.answers));
-      return answers;
-    });
-  }, [quizData]);
 
   function createRandomNumber() {
     return Math.floor(Math.random() * totalAnswers);
@@ -85,10 +81,9 @@ export default function Quiz(props) {
         id={id}
         questionNumber={id + 1}
         question={question}
-        answers={answers}
-        isCheckAnswersBtnClicked={isCheckAnswersBtnClicked}
-        selectedAns={selectedAns}
-        setSelectedAns={setSelectedAns}
+        answers={answers} //each questions's answer array of objects
+        quizData={quizData}
+        setQuizData={setQuizData}
       />
     );
   });
@@ -99,7 +94,6 @@ export default function Quiz(props) {
       <h3>Level: {difficulty}</h3>
       {quizElements}
       <br />
-      {/* <button>Check Answers</button> */}
       <button onClick={handleClick}>Check Answers</button>
     </div>
   );

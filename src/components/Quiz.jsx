@@ -2,9 +2,15 @@ import React, { useEffect, useState } from "react";
 import { nanoid } from "nanoid";
 import { decode } from "html-entities";
 import QuizHtml from "./QuizHtml";
+import QuizIntroSetupPage from "./QuizIntroSetupPage";
 
 export default function Quiz(props) {
-  const { quiz } = props;
+  const {
+    quiz,
+    isCheckAnswersBtnClicked,
+    setIsCheckAnswersBtnClicked,
+    setQuiz,
+  } = props;
   const totalAnswers = 4;
 
   const { category, difficulty } = quiz[0];
@@ -13,8 +19,8 @@ export default function Quiz(props) {
 
   console.log("quizData: ", quizData);
 
-  const [isCheckAnswersBtnClicked, setIsCheckAnswersBtnClicked] =
-    useState(false);
+  // const [isCheckAnswersBtnClicked, setIsCheckAnswersBtnClicked] =
+  //   useState(false);
 
   // BELOW FUNCTION NEEDS TO UPDATE IN ORDER TO DISPLAY THE BACKGROUND COLOR FOR EACH QUESTION'S CORRECT AND INCORRECT ANSWER
   function handleClick() {
@@ -41,7 +47,12 @@ export default function Quiz(props) {
         });
         return updatedQuizAnswers;
       });
-      setIsCheckAnswersBtnClicked(true);
+      setIsCheckAnswersBtnClicked((prevState) => !prevState);
+    } else {
+      setIsCheckAnswersBtnClicked((prevState) => !prevState);
+      setQuiz([]);
+      // setQuizData([]);
+      // setQuizData(() => updateQuizData(quiz));
     }
   }
 

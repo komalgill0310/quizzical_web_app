@@ -7,11 +7,18 @@ import Quiz from "./components/Quiz";
 
 function App() {
   const [quiz, setQuiz] = useState([]);
+  const [isCheckAnswersBtnClicked, setIsCheckAnswersBtnClicked] =
+    useState(false);
 
   return (
     <>
       {quiz.length ? (
-        <Quiz quiz={quiz} />
+        <Quiz
+          quiz={quiz}
+          setQuiz={setQuiz}
+          isCheckAnswersBtnClicked={isCheckAnswersBtnClicked}
+          setIsCheckAnswersBtnClicked={setIsCheckAnswersBtnClicked}
+        />
       ) : (
         <QuizIntroSetupPage setQuiz={setQuiz} />
       )}

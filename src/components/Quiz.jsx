@@ -18,26 +18,31 @@ export default function Quiz(props) {
 
   // BELOW FUNCTION NEEDS TO UPDATE IN ORDER TO DISPLAY THE BACKGROUND COLOR FOR EACH QUESTION'S CORRECT AND INCORRECT ANSWER
   function handleClick() {
-    setIsCheckAnswersBtnClicked((prevState) => !prevState);
-
-    setQuizData((prevState) => {
-      const updatedQuizAnswers = prevState.map((data, i) => {
-        const { correct_answer } = quizData[i];
-        const answersArr = quizData[i]["answers"];
-        const updatedAnswersArr = answersArr.map((answerObj) => {
-          const { ans, isSelected } = answerObj;
-          if ((isSelected || !isSelected) && ans === correct_answer) {
-            return { ...answerObj, isCorrect: true, backgroundColor: "green" };
-          } else if (isSelected && ans != correct_answer) {
-            return { ...answerObj, backgroundColor: "red" };
-          } else {
-            return { ...answerObj };
-          }
+    if (!isCheckAnswersBtnClicked) {
+      setQuizData((prevState) => {
+        const updatedQuizAnswers = prevState.map((data, i) => {
+          const { correct_answer } = quizData[i];
+          const answersArr = quizData[i]["answers"];
+          const updatedAnswersArr = answersArr.map((answerObj) => {
+            const { ans, isSelected } = answerObj;
+            if ((isSelected || !isSelected) && ans === correct_answer) {
+              return {
+                ...answerObj,
+                isCorrect: true,
+                backgroundColor: "green",
+              };
+            } else if (isSelected && ans != correct_answer) {
+              return { ...answerObj, backgroundColor: "red" };
+            } else {
+              return { ...answerObj };
+            }
+          });
+          return { ...data, answers: updatedAnswersArr };
         });
-        return { ...data, answers: updatedAnswersArr };
+        return updatedQuizAnswers;
       });
-      return updatedQuizAnswers;
-    });
+      setIsCheckAnswersBtnClicked(true);
+    }
   }
 
   function updateQuizData(quiz) {
@@ -84,6 +89,7 @@ export default function Quiz(props) {
         answers={answers} //each questions's answer array of objects
         quizData={quizData}
         setQuizData={setQuizData}
+        isCheckAnswersBtnClicked={isCheckAnswersBtnClicked}
       />
     );
   });

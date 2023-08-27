@@ -2,26 +2,35 @@ import React from "react";
 import { nanoid } from "nanoid";
 
 export default function Answers(props) {
-  const { question, answerLocation, answers, quizData, setQuizData } = props;
+  const {
+    question,
+    answerLocation,
+    answers,
+    quizData,
+    setQuizData,
+    isCheckAnswersBtnClicked,
+  } = props;
 
   function handleChange(e, i) {
-    setQuizData((prevState) => {
-      const updatedQuizAnswers = prevState.map((data, dataIndex) => {
-        if (dataIndex === answerLocation) {
-          const updateData = data.answers.map((answerObj, answerIndex) => {
-            if (answerIndex === i) {
-              return { ...answerObj, isSelected: true };
-            } else {
-              return { ...answerObj, isSelected: false };
-            }
-          });
-          return { ...data, answers: updateData };
-        } else {
-          return { ...data };
-        }
+    if (!isCheckAnswersBtnClicked) {
+      setQuizData((prevState) => {
+        const updatedQuizAnswers = prevState.map((data, dataIndex) => {
+          if (dataIndex === answerLocation) {
+            const updateData = data.answers.map((answerObj, answerIndex) => {
+              if (answerIndex === i) {
+                return { ...answerObj, isSelected: true };
+              } else {
+                return { ...answerObj, isSelected: false };
+              }
+            });
+            return { ...data, answers: updateData };
+          } else {
+            return { ...data };
+          }
+        });
+        return updatedQuizAnswers;
       });
-      return updatedQuizAnswers;
-    });
+    }
   }
 
   const answerElements = answers.map((answerObj, i) => {

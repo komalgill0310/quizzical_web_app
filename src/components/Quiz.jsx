@@ -4,17 +4,43 @@ import { decode } from "html-entities";
 import QuizHtml from "./QuizHtml";
 
 export default function Quiz(props) {
-  const { quiz, setQuiz } = props;
   const totalAnswers = 4;
 
-  const { category, difficulty } = quiz[0];
-
+  const { quiz, setQuiz } = props;
   const [quizData, setQuizData] = useState([]);
-
   const [isCheckAnswersBtnClicked, setIsCheckAnswersBtnClicked] =
     useState(false);
 
-  console.log("quizData: ", quizData);
+  const { category, difficulty } = quiz[0];
+
+  useEffect(() => {
+    updateQuizData(quiz);
+  }, []);
+
+  function updateQuizData(quiz) {
+    setQuizData(() => {
+      return quiz.map((data, index) => {
+        const randomIndex = createRandomNumber();
+        const answers = data.incorrect_answers.toSpliced(
+          randomIndex,
+          0,
+          data.correct_answer
+        );
+        return {
+          ...data,
+          id: index,
+          question: decode(data.question),
+          answers: answers.map((answer) => ({
+            ans: decode(answer),
+            isSelected: false,
+            isCorrect: false,
+            backgroundColor: "",
+          })),
+          correct_answer: decode(data.correct_answer),
+        };
+      });
+    });
+  }
 
   function handleClick() {
     if (!isCheckAnswersBtnClicked) {
@@ -47,35 +73,6 @@ export default function Quiz(props) {
     }
   }
 
-  function updateQuizData(quiz) {
-    setQuizData(() => {
-      return quiz.map((data, index) => {
-        const randomIndex = createRandomNumber();
-        const answers = data.incorrect_answers.toSpliced(
-          randomIndex,
-          0,
-          data.correct_answer
-        );
-        return {
-          ...data,
-          id: index,
-          question: decode(data.question),
-          answers: answers.map((answer) => ({
-            ans: decode(answer),
-            isSelected: false,
-            isCorrect: false,
-            backgroundColor: "",
-          })),
-          correct_answer: decode(data.correct_answer),
-        };
-      });
-    });
-  }
-
-  useEffect(() => {
-    updateQuizData(quiz);
-  }, []);
-
   function createRandomNumber() {
     return Math.floor(Math.random() * totalAnswers);
   }
@@ -86,10 +83,10 @@ export default function Quiz(props) {
       <QuizHtml
         key={nanoid()}
         id={id}
-        questionNumber={id + 1}
-        question={question}
         answers={answers} //each questions's answer array of objects
+        question={question}
         quizData={quizData}
+        questionNumber={id + 1}
         setQuizData={setQuizData}
         isCheckAnswersBtnClicked={isCheckAnswersBtnClicked}
       />

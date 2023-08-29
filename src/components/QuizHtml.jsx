@@ -4,11 +4,11 @@ import Answer from "./Answer";
 export default function QuizHtml(props) {
   const {
     id,
-    questionNumber,
-    question,
     answers,
+    question,
     quizData,
     setQuizData,
+    questionNumber,
     isCheckAnswersBtnClicked,
   } = props;
   return (

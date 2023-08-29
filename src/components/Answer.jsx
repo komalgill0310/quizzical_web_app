@@ -3,11 +3,11 @@ import { nanoid } from "nanoid";
 
 export default function Answers(props) {
   const {
-    question,
-    answerLocation,
     answers,
+    question,
     quizData,
     setQuizData,
+    answerLocation,
     isCheckAnswersBtnClicked,
   } = props;
 

@@ -2,27 +2,20 @@ import React, { useEffect, useState } from "react";
 import { nanoid } from "nanoid";
 import { decode } from "html-entities";
 import QuizHtml from "./QuizHtml";
-import QuizIntroSetupPage from "./QuizIntroSetupPage";
 
 export default function Quiz(props) {
-  const {
-    quiz,
-    isCheckAnswersBtnClicked,
-    setIsCheckAnswersBtnClicked,
-    setQuiz,
-  } = props;
+  const { quiz, setQuiz } = props;
   const totalAnswers = 4;
 
   const { category, difficulty } = quiz[0];
 
   const [quizData, setQuizData] = useState([]);
 
+  const [isCheckAnswersBtnClicked, setIsCheckAnswersBtnClicked] =
+    useState(false);
+
   console.log("quizData: ", quizData);
 
-  // const [isCheckAnswersBtnClicked, setIsCheckAnswersBtnClicked] =
-  //   useState(false);
-
-  // BELOW FUNCTION NEEDS TO UPDATE IN ORDER TO DISPLAY THE BACKGROUND COLOR FOR EACH QUESTION'S CORRECT AND INCORRECT ANSWER
   function handleClick() {
     if (!isCheckAnswersBtnClicked) {
       setQuizData((prevState) => {
@@ -51,8 +44,6 @@ export default function Quiz(props) {
     } else {
       setIsCheckAnswersBtnClicked((prevState) => !prevState);
       setQuiz([]);
-      // setQuizData([]);
-      // setQuizData(() => updateQuizData(quiz));
     }
   }
 

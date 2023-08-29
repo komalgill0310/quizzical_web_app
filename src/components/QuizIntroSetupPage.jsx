@@ -3,7 +3,6 @@ import React, { useState } from "react";
 export default function QuizIntroSetupPage(props) {
   const { setQuiz } = props;
   const [quizSelections, setQuizSelections] = useState({
-    quizTopic: "",
     quizDifficultyLevel: "",
   });
 
@@ -15,16 +14,16 @@ export default function QuizIntroSetupPage(props) {
   }
 
   async function handleClick() {
-    const { quizTopic, quizDifficultyLevel } = quizSelections;
-    if (quizTopic && quizDifficultyLevel) {
+    const { quizDifficultyLevel } = quizSelections;
+    if (quizDifficultyLevel) {
       const res = await fetch(
-        `https://opentdb.com/api.php?amount=5&category=${quizTopic}&difficulty=${quizDifficultyLevel}&type=multiple`
+        `https://opentdb.com/api.php?amount=5&difficulty=${quizDifficultyLevel}&type=multiple`
       );
       const data = await res.json();
       console.log("data is: ", data.results);
       setQuiz(data.results);
     } else {
-      alert("Please select topic and difficulty level");
+      alert("Please select difficulty level");
     }
   }
 
@@ -38,8 +37,8 @@ export default function QuizIntroSetupPage(props) {
       </p>
 
       {/* Below HTML for quiz topic */}
-      <label htmlFor="selected-quiz-id">Select Topic: </label>
-      <select
+      {/* <label htmlFor="selected-quiz-id">Select Topic: </label> */}
+      {/* <select
         name="quizTopic"
         id="quiz-id"
         onChange={handleChange}
@@ -55,7 +54,7 @@ export default function QuizIntroSetupPage(props) {
         <option value="20">Mythology</option>
         <option value="30">Science: Gadgets</option>
         <option value="32">Entertainment: Cartoon & Animations</option>
-      </select>
+      </select> */}
 
       {/* Below HTML for quiz difficulty level */}
       <label htmlFor="quiz-difficulty-level-id">Select Quiz Difficulty: </label>

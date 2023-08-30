@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { nanoid } from "nanoid";
 import { decode } from "html-entities";
-import QuizHtml from "./QuizHtml";
+import QuizHtml from "../QuizHtml/QuizHtml";
 
 export default function Quiz(props) {
   const totalAnswers = 4;

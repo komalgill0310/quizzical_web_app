@@ -1,0 +1,117 @@
+.container {
+  /*Display stuff*/
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /*Box model stuff*/
+  padding: 0 auto;
+}
+
+.title {
+  /*Box model stuff*/
+  margin-bottom: 0;
+  /*Typography stuff*/
+  font-family: "Karla", sans-serif;
+  font-size: 51.25px;
+  font-weight: 700;
+  color: #293264;
+}
+
+.info {
+  /*Box model stuff*/
+  width: 270px;
+  /*Typography stuff*/
+  font-family: Inter;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 700;
+  text-align: left;
+  color: #293264;
+  /*Miscellaneous*/
+  line-height: normal;
+}
+
+.difficultyContainer {
+  /*Display stuff*/
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+  /*Box model stuff*/
+  width: 267px;
+  height: 37px;
+  margin-bottom: 13px;
+  padding: 4px;
+  border-radius: 9px;
+  background: linear-gradient(to right, #e3e2e2 50%, #7c87c2 50%);
+}
+
+.difficultyContainer:hover {
+  /*Box model stuff*/
+  background: linear-gradient(to right, #e3e2e2 50%, #4d5b9e 50%);
+}
+
+.difficultyLabel {
+  /*Display stuff*/
+  align-items: center;
+  /*Box model stuff*/
+  border-color: #e3e2e2;
+  background-color: #e3e2e2;
+  /*Typography stuff*/
+  font-family: "Karla", sans-serif;
+  font-size: 21px;
+  font-weight: 500;
+  color: #4d5b9e;
+  /*Miscellaneous*/
+  line-height: normal;
+}
+
+.difficultyLevel {
+  /*Box model stuff*/
+  height: 45px;
+  margin: 0;
+  padding: 0 27px 0 7px;
+  border: 0;
+  border-color: #7c87c2;
+  background-color: #7c87c2;
+  /*Typography stuff*/
+  font-family: Inter;
+  font-size: 16px;
+  font-weight: 500;
+  color: white;
+  /*Miscellaneous*/
+  cursor: pointer;
+}
+
+.difficultyLevel:hover {
+  /*Box model stuff*/
+  border-color: #4d5b9e;
+  background-color: #4d5b9e;
+}
+
+.difficultyLevel:focus {
+  /*Box model stuff*/
+  outline: none;
+}
+
+.startBtn {
+  /*Box model stuff*/
+  width: 193px;
+  height: 52px;
+  margin: auto;
+  margin-top: 29px;
+  border: 0;
+  border-radius: 15px;
+  background: #4d5b9e;
+  /*Typography stuff*/
+  font-family: Inter;
+  font-size: 16px;
+  font-weight: 500;
+  text-align: center;
+  color: #f5f7fb;
+}
+
+.btnStartQuiz:hover {
+  /*Box model stuff*/
+  background-color: #7c87c2;
+}

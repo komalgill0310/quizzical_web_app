@@ -1,0 +1,25 @@
+.quizContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+}
+
+.infoSection {
+  display: inherit;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.category,
+.level {
+  background: linear-gradient(to right, #e3e2e2 35%, #7c87c2 65%);
+  border-radius: 13px;
+  align-items: center;
+  height: auto;
+  padding: 7px 13px;
+}
+
+.level {
+  text-transform: capitalize;
+}

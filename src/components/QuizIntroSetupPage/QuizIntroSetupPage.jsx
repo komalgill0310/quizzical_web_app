@@ -18,7 +18,7 @@ export default function QuizIntroSetupPage(props) {
     const { difficulty } = selections;
     if (difficulty) {
       const response = await fetch(
-        `https://opentdb.com/api.php?amount=5&difficulty=${difficulty}&type=multiple`
+        `https://opentdb.com/api.php?amount=5&difficulty=${difficulty}`
       );
       const data = await response.json();
       setQuiz(data.results);

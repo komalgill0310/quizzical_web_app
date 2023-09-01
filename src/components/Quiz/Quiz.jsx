@@ -3,6 +3,8 @@ import { nanoid } from "nanoid";
 import { decode } from "html-entities";
 import QuizHtml from "../QuizHtml/QuizHtml";
 
+import styles from "./Quiz.module.css";
+
 export default function Quiz(props) {
   const totalAnswers = 4;
 
@@ -94,12 +96,15 @@ export default function Quiz(props) {
   });
 
   return (
-    <div>
-      <h3>Category: {category}</h3>
-      <h3>Level: {difficulty}</h3>
+    <div className={styles.quizContainer}>
+      <div className={styles.infoSection}>
+        <h3 className={styles.category}>{category}</h3>
+        <h3 className={styles.level}>{difficulty}</h3>
+      </div>
       {quizElements}
-      <br />
-      <button onClick={handleClick}>Check Answers</button>
+      <button className={styles.checkAnswersBtn} onClick={handleClick}>
+        Check Answers
+      </button>
     </div>
   );
 }

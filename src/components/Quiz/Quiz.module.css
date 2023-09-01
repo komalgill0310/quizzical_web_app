@@ -23,3 +23,21 @@
 .level {
   text-transform: capitalize;
 }
+
+.checkAnswersBtn {
+  background-color: #4d5b9e;
+  width: auto;
+  align-self: center;
+  border: none;
+  color: #f5f7fb;
+  text-align: center;
+  font-family: Inter;
+  font-size: 15.24px;
+  font-weight: 600;
+  border-radius: 9px;
+  padding: 11px 13px;
+}
+
+.checkAnswersBtn:hover {
+  background-color: #7c87c2;
+}

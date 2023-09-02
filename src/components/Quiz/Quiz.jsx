@@ -19,7 +19,7 @@ export default function Quiz(props) {
     updateQuizQuestionsData(quizData);
   }, []);
 
-  function updateQuizQuestionsData(quiz) {
+  function updateQuizQuestionsData(quizData) {
     setQuizQuestionsData(() => {
       return quizData.map((data, index) => {
         const randomIndex = createRandomNumber();

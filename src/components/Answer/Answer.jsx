@@ -6,15 +6,15 @@ export default function Answers(props) {
   const {
     answers,
     question,
-    quizData,
-    setQuizData,
+    quizQuestionsData,
+    setquizQuestionsData,
     answerLocation,
     isCheckAnswersBtnClicked,
   } = props;
 
   function handleChange(e, i) {
     if (!isCheckAnswersBtnClicked) {
-      setQuizData((prevState) => {
+      setquizQuestionsData((prevState) => {
         const updatedQuizAnswers = prevState.map((data, dataIndex) => {
           if (dataIndex === answerLocation) {
             const updateData = data.answers.map((answerObj, answerIndex) => {
@@ -49,8 +49,8 @@ export default function Answers(props) {
           name={question}
           value={ans}
           checked={
-            quizData[answerLocation]["answers"][i]["isSelected"] &&
-            quizData[answerLocation]["answers"][i]["ans"] === ans
+            quizQuestionsData[answerLocation]["answers"][i]["isSelected"] &&
+            quizQuestionsData[answerLocation]["answers"][i]["ans"] === ans
           }
           onChange={(e) => handleChange(e, i)}
           className={styles.radioBtn}

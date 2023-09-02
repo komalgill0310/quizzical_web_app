@@ -14,10 +14,11 @@
   color: #293264;
   text-align: center;
   font-family: Inter;
-  font-size: 10.24px;
+  font-size: 17.24px;
   font-style: normal;
   font-weight: 500;
   line-height: normal;
+  display: inline-block;
 }
 
 .radioBtn:checked + .label {

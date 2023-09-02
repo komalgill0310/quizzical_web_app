@@ -9,18 +9,18 @@ export default function Quiz(props) {
   const totalAnswers = 4;
 
   const { quiz, setQuiz } = props;
-  const [quizData, setQuizData] = useState([]);
+  const [quizQuestionsData, setQuizQuestionsData] = useState([]);
   const [isCheckAnswersBtnClicked, setIsCheckAnswersBtnClicked] =
     useState(false);
 
   const { category, difficulty } = quiz[0];
 
   useEffect(() => {
-    updateQuizData(quiz);
+    updateQuizQuestionsData(quiz);
   }, []);
 
-  function updateQuizData(quiz) {
-    setQuizData(() => {
+  function updateQuizQuestionsData(quiz) {
+    setQuizQuestionsData(() => {
       return quiz.map((data, index) => {
         const randomIndex = createRandomNumber();
         const answers = data.incorrect_answers.toSpliced(
@@ -46,10 +46,10 @@ export default function Quiz(props) {
 
   function handleClick() {
     if (!isCheckAnswersBtnClicked) {
-      setQuizData((prevState) => {
+      setQuizQuestionsData((prevState) => {
         const updatedQuizAnswers = prevState.map((data, i) => {
-          const { correct_answer } = quizData[i];
-          const answersArr = quizData[i]["answers"];
+          const { correct_answer } = quizQuestionsData[i];
+          const answersArr = quizQuestionsData[i]["answers"];
           const updatedAnswersArr = answersArr.map((answerObj) => {
             const { ans, isSelected } = answerObj;
             if ((isSelected || !isSelected) && ans === correct_answer) {
@@ -79,17 +79,17 @@ export default function Quiz(props) {
     return Math.floor(Math.random() * totalAnswers);
   }
 
-  const quizElements = quizData.map((eachQuizData) => {
-    const { id, question, answers } = eachQuizData;
+  const quizElements = quizQuestionsData.map((eachQuizQuestionsData) => {
+    const { id, question, answers } = eachQuizQuestionsData;
     return (
       <QuizHtml
         key={nanoid()}
         id={id}
         answers={answers} //each questions's answer array of objects
         question={question}
-        quizData={quizData}
+        quizQuestionsData={quizQuestionsData}
         questionNumber={id + 1}
-        setQuizData={setQuizData}
+        setQuizQuestionsData={setQuizQuestionsData}
         isCheckAnswersBtnClicked={isCheckAnswersBtnClicked}
       />
     );

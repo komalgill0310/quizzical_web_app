@@ -2,7 +2,7 @@ import { useState } from "react";
 import React from "react";
 import "./App.css";
 
-import QuizIntroSetupPage from "./components/QuizIntroSetupPage/QuizIntroSetupPage";
+import QuizSetupPage from "./components/QuizSetupPage/QuizSetupPage";
 import Quiz from "./components/Quiz/Quiz";
 
 function App() {
@@ -13,7 +13,7 @@ function App() {
       {quiz.length ? (
         <Quiz quiz={quiz} setQuiz={setQuiz} />
       ) : (
-        <QuizIntroSetupPage setQuiz={setQuiz} />
+        <QuizSetupPage setQuiz={setQuiz} />
       )}
     </div>
   );

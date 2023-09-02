@@ -6,8 +6,8 @@ export default function QuizHtml(props) {
     id,
     answers,
     question,
-    quizData,
-    setQuizData,
+    quizQuestionsData,
+    setquizQuestionsData,
     questionNumber,
     isCheckAnswersBtnClicked,
   } = props;
@@ -20,8 +20,8 @@ export default function QuizHtml(props) {
         answerLocation={id}
         answers={answers}
         question={question}
-        quizData={quizData}
-        setQuizData={setQuizData}
+        quizQuestionsData={quizQuestionsData}
+        setquizQuestionsData={setquizQuestionsData}
         isCheckAnswersBtnClicked={isCheckAnswersBtnClicked}
       />
     </div>

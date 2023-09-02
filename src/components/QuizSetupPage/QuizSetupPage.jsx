@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import styles from "./QuizIntroSetupPage.module.css";
+import styles from "./QuizSetupPage.module.css";
 
-export default function QuizIntroSetupPage(props) {
+export default function QuizSetupPage(props) {
   const { setQuiz } = props;
   const [selections, setSelections] = useState({
     difficulty: "",

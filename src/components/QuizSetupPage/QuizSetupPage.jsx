@@ -4,7 +4,7 @@ import styles from "./QuizSetupPage.module.css";
 export default function QuizSetupPage(props) {
   const { setquizData } = props;
   const [selections, setSelections] = useState({
-    difficulty: "",
+    difficulty: "easy",
   });
 
   function handleChange(event) {
@@ -16,15 +16,10 @@ export default function QuizSetupPage(props) {
 
   async function handleClick() {
     const { difficulty } = selections;
-    if (difficulty) {
-      const response = await fetch(
-        `https://opentdb.com/api.php?amount=5&difficulty=${difficulty}`
-      );
-      const data = await response.json();
-      setquizData(data.results);
-    } else {
-      alert("Please select difficulty level");
-    }
+    const apiUrl = import.meta.env.VITE_REACT_APP_API_URL;
+    const response = await fetch(`${apiUrl}?amount=5&difficulty=${difficulty}`);
+    const data = await response.json();
+    setquizData(data.results);
   }
 
   return (
@@ -44,15 +39,12 @@ export default function QuizSetupPage(props) {
           name="difficulty"
           id="difficulty-select"
           onChange={handleChange}
-          defaultValue="Choose one"
+          defaultValue="Easy"
           className={styles.difficultyLevel}
         >
-          <option disabled value="Choose one">
-            Choose one
-          </option>
-          <option value="easy">Easy</option>
-          <option value="medium">Medium</option>
-          <option value="hard">Hard</option>
+          <option value="easy">easy</option>
+          <option value="medium">medium</option>
+          <option value="hard">hard</option>
         </select>
       </div>
 

@@ -1,5 +1,6 @@
 import React from "react";
 import { nanoid } from "nanoid";
+import styles from "./Answer.module.css";
 
 export default function Answers(props) {
   const {
@@ -37,7 +38,11 @@ export default function Answers(props) {
     const inputId = nanoid();
     const { ans, backgroundColor } = answerObj;
     return (
-      <div key={nanoid()} style={{ backgroundColor }}>
+      <div
+        key={nanoid()}
+        style={{ backgroundColor }}
+        className={styles.radioButton}
+      >
         <input
           type="radio"
           id={inputId}
@@ -48,8 +53,11 @@ export default function Answers(props) {
             quizData[answerLocation]["answers"][i]["ans"] === ans
           }
           onChange={(e) => handleChange(e, i)}
+          className={styles.radioBtn}
         />
-        <label htmlFor={inputId}>{ans}</label>
+        <label htmlFor={inputId} className={styles.label}>
+          {ans}
+        </label>
       </div>
     );
   });

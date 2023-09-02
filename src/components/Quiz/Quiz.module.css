@@ -36,6 +36,7 @@
   font-weight: 600;
   border-radius: 9px;
   padding: 11px 13px;
+  border-color: #4d5b9e;
 }
 
 .checkAnswersBtn:hover {

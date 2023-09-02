@@ -1,0 +1,26 @@
+.radioButton {
+  display: flex;
+  flex-direction: row;
+}
+
+.radioBtn {
+  display: none;
+}
+
+.label {
+  border-radius: 7.71px;
+  border: 0.771px solid #4d5b9e;
+  cursor: pointer;
+  color: #293264;
+  text-align: center;
+  font-family: Inter;
+  font-size: 10.24px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
+
+.radioBtn:checked + .label {
+  border-radius: 7.942px;
+  background: #d6dbf5;
+}

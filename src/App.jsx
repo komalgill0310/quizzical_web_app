@@ -6,14 +6,14 @@ import QuizSetupPage from "./components/QuizSetupPage/QuizSetupPage";
 import Quiz from "./components/Quiz/Quiz";
 
 function App() {
-  const [quiz, setQuiz] = useState([]);
+  const [quizData, setquizData] = useState([]);
 
   return (
     <div>
-      {quiz.length ? (
-        <Quiz quiz={quiz} setQuiz={setQuiz} />
+      {quizData.length ? (
+        <Quiz quizData={quizData} setquizData={setquizData} />
       ) : (
-        <QuizSetupPage setQuiz={setQuiz} />
+        <QuizSetupPage setquizData={setquizData} />
       )}
     </div>
   );

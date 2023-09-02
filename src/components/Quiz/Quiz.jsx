@@ -8,20 +8,20 @@ import styles from "./Quiz.module.css";
 export default function Quiz(props) {
   const totalAnswers = 4;
 
-  const { quiz, setQuiz } = props;
+  const { quizData, setquizData } = props;
   const [quizQuestionsData, setQuizQuestionsData] = useState([]);
   const [isCheckAnswersBtnClicked, setIsCheckAnswersBtnClicked] =
     useState(false);
 
-  const { category, difficulty } = quiz[0];
+  const { category, difficulty } = quizData[0];
 
   useEffect(() => {
-    updateQuizQuestionsData(quiz);
+    updateQuizQuestionsData(quizData);
   }, []);
 
   function updateQuizQuestionsData(quiz) {
     setQuizQuestionsData(() => {
-      return quiz.map((data, index) => {
+      return quizData.map((data, index) => {
         const randomIndex = createRandomNumber();
         const answers = data.incorrect_answers.toSpliced(
           randomIndex,
@@ -71,7 +71,7 @@ export default function Quiz(props) {
       setIsCheckAnswersBtnClicked((prevState) => !prevState);
     } else {
       setIsCheckAnswersBtnClicked((prevState) => !prevState);
-      setQuiz([]);
+      setquizData([]);
     }
   }
 

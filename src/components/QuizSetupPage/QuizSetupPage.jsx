@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import styles from "./QuizSetupPage.module.css";
 
 export default function QuizSetupPage(props) {
-  const { setQuiz } = props;
+  const { setquizData } = props;
   const [selections, setSelections] = useState({
     difficulty: "",
   });
@@ -21,7 +21,7 @@ export default function QuizSetupPage(props) {
         `https://opentdb.com/api.php?amount=5&difficulty=${difficulty}`
       );
       const data = await response.json();
-      setQuiz(data.results);
+      setquizData(data.results);
     } else {
       alert("Please select difficulty level");
     }

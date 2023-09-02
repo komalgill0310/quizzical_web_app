@@ -42,13 +42,13 @@ export default function QuizSetupPage(props) {
           defaultValue="Easy"
           className={styles.difficultyLevel}
         >
-          <option value="easy">easy</option>
-          <option value="medium">medium</option>
-          <option value="hard">hard</option>
+          <option value="easy">Easy</option>
+          <option value="medium">Medium</option>
+          <option value="hard">Hard</option>
         </select>
       </div>
 
-      {/* button to Start the quiz */}
+      {/* Button to Start the quiz */}
       <button className={styles.startBtn} type="button" onClick={handleClick}>
         Start Quiz
       </button>

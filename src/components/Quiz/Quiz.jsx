@@ -51,7 +51,7 @@ export default function Quiz(props) {
     };
   }
 
-  function handleClick() {
+  function toggleCheckAnswersAndReset() {
     if (!isCheckingAnswers) {
       setQuizQuestionsData((prevState) => {
         const updatedQuizAnswers = prevState.map((data, i) => {
@@ -114,7 +114,10 @@ export default function Quiz(props) {
         <h3 className={styles.level}>{difficulty}</h3>
       </div>
       {quizElements}
-      <button className={styles.checkAnswersBtn} onClick={handleClick}>
+      <button
+        className={styles.checkAnswersBtn}
+        onClick={toggleCheckAnswersAndReset}
+      >
         Check Answers
       </button>
     </div>

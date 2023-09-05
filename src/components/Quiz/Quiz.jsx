@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { nanoid } from "nanoid";
 import { decode } from "html-entities";
-import QuizHtml from "../QuizHtml/QuizHtml";
 
 import styles from "./Quiz.module.css";
+import QuizHtml from "../QuizHtml/QuizHtml";
 
 export default function Quiz(props) {
   const totalAnswers = 4;
@@ -16,32 +16,40 @@ export default function Quiz(props) {
   const { category, difficulty } = quizData[0];
 
   useEffect(() => {
-    updateQuizQuestionsData(quizData);
+    updateQuizQuestionsDataState(quizData);
   }, []);
 
-  function updateQuizQuestionsData(quizData) {
+  function updateQuizQuestionsDataState(quizData) {
     setQuizQuestionsData(() => {
       return quizData.map((data, index) => {
+        // Using snake_case to maintain consistency with the original naming convention from the API
+        const { incorrect_answers, correct_answer, question } = data;
         const randomIndex = createRandomNumber();
-        const answers = data.incorrect_answers.toSpliced(
+        const answers = incorrect_answers.toSpliced(
           randomIndex,
           0,
           data.correct_answer
         );
         return {
-          ...data,
           id: index,
-          question: decode(data.question),
-          answers: answers.map((answer) => ({
-            ans: decode(answer),
-            isSelected: false,
-            isCorrect: false,
-            backgroundColor: "",
-          })),
-          correct_answer: decode(data.correct_answer),
+          ...data,
+          ...decodeData(question, answers, correct_answer),
         };
       });
     });
+  }
+
+  function decodeData(question, answers, correct_answer) {
+    return {
+      question: decode(question),
+      answers: answers.map((answer) => ({
+        decodedAnswer: decode(answer),
+        isSelected: false,
+        isCorrect: false,
+        backgroundColor: "",
+      })),
+      correct_answer: decode(correct_answer),
+    };
   }
 
   function handleClick() {
@@ -51,18 +59,23 @@ export default function Quiz(props) {
           const { correct_answer } = quizQuestionsData[i];
           const answersArr = quizQuestionsData[i]["answers"];
           const updatedAnswersArr = answersArr.map((answerObj) => {
-            const { ans, isSelected } = answerObj;
-            if ((isSelected || !isSelected) && ans === correct_answer) {
-              return {
+            const { decodedAnswer, isSelected } = answerObj;
+            let updatedAnswerObj;
+            if (
+              (isSelected || !isSelected) &&
+              decodedAnswer === correct_answer
+            ) {
+              updatedAnswerObj = {
                 ...answerObj,
                 isCorrect: true,
                 backgroundColor: "green",
               };
-            } else if (isSelected && ans != correct_answer) {
-              return { ...answerObj, backgroundColor: "red" };
+            } else if (isSelected && decodedAnswer != correct_answer) {
+              updatedAnswerObj = { ...answerObj, backgroundColor: "red" };
             } else {
-              return { ...answerObj };
+              updatedAnswerObj = { ...answerObj };
             }
+            return updatedAnswerObj;
           });
           return { ...data, answers: updatedAnswersArr };
         });

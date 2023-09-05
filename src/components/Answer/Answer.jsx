@@ -7,14 +7,14 @@ export default function Answers(props) {
     answers,
     question,
     quizQuestionsData,
-    setquizQuestionsData,
+    setQuizQuestionsData,
     answerLocation,
     isCheckAnswersBtnClicked,
   } = props;
 
   function handleChange(e, i) {
     if (!isCheckAnswersBtnClicked) {
-      setquizQuestionsData((prevState) => {
+      setQuizQuestionsData((prevState) => {
         const updatedQuizAnswers = prevState.map((data, dataIndex) => {
           if (dataIndex === answerLocation) {
             const updateData = data.answers.map((answerObj, answerIndex) => {
@@ -36,7 +36,7 @@ export default function Answers(props) {
 
   const answerElements = answers.map((answerObj, i) => {
     const inputId = nanoid();
-    const { ans, backgroundColor } = answerObj;
+    const { decodedAnswer, backgroundColor } = answerObj;
     return (
       <div
         key={nanoid()}
@@ -47,16 +47,17 @@ export default function Answers(props) {
           type="radio"
           id={inputId}
           name={question}
-          value={ans}
+          value={decodedAnswer}
           checked={
             quizQuestionsData[answerLocation]["answers"][i]["isSelected"] &&
-            quizQuestionsData[answerLocation]["answers"][i]["ans"] === ans
+            quizQuestionsData[answerLocation]["answers"][i]["decodedAnswer"] ===
+              decodedAnswer
           }
           onChange={(e) => handleChange(e, i)}
           className={styles.radioBtn}
         />
         <label htmlFor={inputId} className={styles.label}>
-          {ans}
+          {decodedAnswer}
         </label>
       </div>
     );

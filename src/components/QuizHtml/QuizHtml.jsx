@@ -9,7 +9,7 @@ export default function QuizHtml(props) {
     quizQuestionsData,
     setQuizQuestionsData,
     questionNumber,
-    isCheckAnswersBtnClicked,
+    isCheckingAnswers,
   } = props;
   return (
     <div>
@@ -22,7 +22,7 @@ export default function QuizHtml(props) {
         question={question}
         quizQuestionsData={quizQuestionsData}
         setQuizQuestionsData={setQuizQuestionsData}
-        isCheckAnswersBtnClicked={isCheckAnswersBtnClicked}
+        isCheckingAnswers={isCheckingAnswers}
       />
     </div>
   );

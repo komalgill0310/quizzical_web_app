@@ -9,11 +9,11 @@ export default function Answers(props) {
     quizQuestionsData,
     setQuizQuestionsData,
     answerLocation,
-    isCheckAnswersBtnClicked,
+    isCheckingAnswers,
   } = props;
 
   function handleChange(e, i) {
-    if (!isCheckAnswersBtnClicked) {
+    if (!isCheckingAnswers) {
       setQuizQuestionsData((prevState) => {
         const updatedQuizAnswers = prevState.map((data, dataIndex) => {
           if (dataIndex === answerLocation) {

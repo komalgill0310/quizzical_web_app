@@ -10,8 +10,7 @@ export default function Quiz(props) {
 
   const { quizData, setquizData } = props;
   const [quizQuestionsData, setQuizQuestionsData] = useState([]);
-  const [isCheckAnswersBtnClicked, setIsCheckAnswersBtnClicked] =
-    useState(false);
+  const [isCheckingAnswers, setisCheckingAnswers] = useState(false);
 
   const { category, difficulty } = quizData[0];
 
@@ -53,7 +52,7 @@ export default function Quiz(props) {
   }
 
   function handleClick() {
-    if (!isCheckAnswersBtnClicked) {
+    if (!isCheckingAnswers) {
       setQuizQuestionsData((prevState) => {
         const updatedQuizAnswers = prevState.map((data, i) => {
           const { correct_answer } = quizQuestionsData[i];
@@ -81,9 +80,9 @@ export default function Quiz(props) {
         });
         return updatedQuizAnswers;
       });
-      setIsCheckAnswersBtnClicked((prevState) => !prevState);
+      setisCheckingAnswers((prevState) => !prevState);
     } else {
-      setIsCheckAnswersBtnClicked((prevState) => !prevState);
+      setisCheckingAnswers((prevState) => !prevState);
       setquizData([]);
     }
   }
@@ -103,7 +102,7 @@ export default function Quiz(props) {
         quizQuestionsData={quizQuestionsData}
         questionNumber={id + 1}
         setQuizQuestionsData={setQuizQuestionsData}
-        isCheckAnswersBtnClicked={isCheckAnswersBtnClicked}
+        isCheckingAnswers={isCheckingAnswers}
       />
     );
   });

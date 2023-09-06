@@ -1,7 +1,7 @@
 import React from "react";
 import Answer from "../Answer/Answer";
 
-export default function QuizHtml(props) {
+export default function QuizQuestion(props) {
   const {
     id,
     answers,
@@ -11,16 +11,16 @@ export default function QuizHtml(props) {
     isCheckingAnswers,
   } = props;
   return (
-    <div>
+    <>
       <h5>{question}</h5>
       <Answer
-        answerLocation={id}
+        questionIndex={id}
         answers={answers}
         question={question}
         quizQuestionsData={quizQuestionsData}
         setQuizQuestionsData={setQuizQuestionsData}
         isCheckingAnswers={isCheckingAnswers}
       />
-    </div>
+    </>
   );
 }

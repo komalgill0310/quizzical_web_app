@@ -3,7 +3,7 @@ import { nanoid } from "nanoid";
 import { decode } from "html-entities";
 
 import styles from "./Quiz.module.css";
-import QuizHtml from "../QuizHtml/QuizHtml";
+import QuizQuestion from "../QuizQuestion/QuizQuestion";
 
 export default function Quiz(props) {
   const totalAnswers = 4;
@@ -100,7 +100,7 @@ export default function Quiz(props) {
   const quizElements = quizQuestionsData.map((eachQuizQuestionsData) => {
     const { id, question, answers } = eachQuizQuestionsData;
     return (
-      <QuizHtml
+      <QuizQuestion
         key={nanoid()}
         id={id}
         answers={answers} //each questions's answer array of objects

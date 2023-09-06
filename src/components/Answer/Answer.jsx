@@ -8,7 +8,7 @@ export default function Answers(props) {
     question,
     quizQuestionsData,
     setQuizQuestionsData,
-    answerLocation,
+    questionIndex,
     isCheckingAnswers,
   } = props;
 
@@ -16,7 +16,7 @@ export default function Answers(props) {
     if (!isCheckingAnswers) {
       setQuizQuestionsData((prevState) => {
         const updatedQuizAnswers = prevState.map((data, dataIndex) => {
-          if (dataIndex === answerLocation) {
+          if (dataIndex === questionIndex) {
             const updateData = data.answers.map((answerObj, answerIndex) => {
               if (answerIndex === i) {
                 return { ...answerObj, isSelected: true };
@@ -49,8 +49,8 @@ export default function Answers(props) {
           name={question}
           value={decodedAnswer}
           checked={
-            quizQuestionsData[answerLocation]["answers"][i]["isSelected"] &&
-            quizQuestionsData[answerLocation]["answers"][i]["decodedAnswer"] ===
+            quizQuestionsData[questionIndex]["answers"][i]["isSelected"] &&
+            quizQuestionsData[questionIndex]["answers"][i]["decodedAnswer"] ===
               decodedAnswer
           }
           onChange={(e) => handleChange(e, i)}

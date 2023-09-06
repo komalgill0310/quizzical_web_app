@@ -15,30 +15,26 @@ export default function QuizSetupPage(props) {
     }));
   }
 
-  async function handleClick() {
-    const { difficulty, category } = selections;
+  async function fetchQuizData() {
     const apiUrl = import.meta.env.VITE_REACT_APP_API_URL;
-    const response = await fetch(
-      `${apiUrl}?amount=5&difficulty=${difficulty}&category=${category}`
-    );
+    const endPoints = buildApiEndpoints();
+    const response = await fetch(`${apiUrl}?amount=5&${endPoints}`);
     const data = await response.json();
     setquizData(data.results);
-    apiEndPoints();
   }
 
-  function apiEndPoints() {
+  function buildApiEndpoints() {
     const { difficulty, category } = selections;
-    console.log(difficulty, category);
-    if (difficulty === "any category" && category === "9") {
-      return;
-    } else if (difficulty === "any category" && category !== "9") {
-      return `category=${category}`;
-    } else if (difficulty !== "any category" && category === "9") {
-      return `difficulty=${difficulty}`;
-    } else {
-      return `difficulty=${difficulty}&category=${category}`;
-    }
+    const difficultyParam =
+      difficulty !== "any category" ? `difficulty=${difficulty}` : "";
+    const categoryParam =
+      category !== "any category" ? `category=${category}` : "";
+    const endpointParam = [difficultyParam, categoryParam]
+      .filter(Boolean)
+      .join("&");
+    return endpointParam;
   }
+
   return (
     <div className={styles.container}>
       <h1 className={styles.title}>Quizzical</h1>
@@ -54,6 +50,7 @@ export default function QuizSetupPage(props) {
         id="category-select"
         onChange={handleChange}
         defaultValue="9"
+        className={styles.category}
       >
         <option value="any category">Any Category</option>
         <option value="9">General Knowledge</option>
@@ -94,7 +91,7 @@ export default function QuizSetupPage(props) {
           defaultValue="easy"
           className={styles.difficultyLevel}
         >
-          <option value="any Category">Any Difficulty</option>
+          <option value="any category">Any Difficulty</option>
           <option value="easy">Easy</option>
           <option value="medium">Medium</option>
           <option value="hard">Hard</option>
@@ -102,7 +99,7 @@ export default function QuizSetupPage(props) {
       </div>
 
       {/* Button to Start the quiz */}
-      <button className={styles.startBtn} type="button" onClick={handleClick}>
+      <button className={styles.startBtn} type="button" onClick={fetchQuizData}>
         Start Quiz
       </button>
     </div>

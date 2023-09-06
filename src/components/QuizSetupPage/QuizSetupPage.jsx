@@ -23,8 +23,22 @@ export default function QuizSetupPage(props) {
     );
     const data = await response.json();
     setquizData(data.results);
+    apiEndPoints();
   }
 
+  function apiEndPoints() {
+    const { difficulty, category } = selections;
+    console.log(difficulty, category);
+    if (difficulty === "any category" && category === "9") {
+      return;
+    } else if (difficulty === "any category" && category !== "9") {
+      return `category=${category}`;
+    } else if (difficulty !== "any category" && category === "9") {
+      return `difficulty=${difficulty}`;
+    } else {
+      return `difficulty=${difficulty}&category=${category}`;
+    }
+  }
   return (
     <div className={styles.container}>
       <h1 className={styles.title}>Quizzical</h1>
@@ -34,9 +48,9 @@ export default function QuizSetupPage(props) {
       </p>
 
       {/* Below HTML for quiz topic */}
-      <label htmlFor="category-select">Select Topic: </label>
+      <label htmlFor="category-select">Select Category: </label>
       <select
-        name="quizTopic"
+        name="category"
         id="category-select"
         onChange={handleChange}
         defaultValue="9"

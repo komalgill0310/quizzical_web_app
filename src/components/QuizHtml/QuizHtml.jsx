@@ -8,14 +8,11 @@ export default function QuizHtml(props) {
     question,
     quizQuestionsData,
     setQuizQuestionsData,
-    questionNumber,
     isCheckingAnswers,
   } = props;
   return (
     <div>
-      <h5>
-        {questionNumber}. {question}
-      </h5>
+      <h5>{question}</h5>
       <Answer
         answerLocation={id}
         answers={answers}

@@ -106,7 +106,6 @@ export default function Quiz(props) {
         answers={answers} //each questions's answer array of objects
         question={question}
         quizQuestionsData={quizQuestionsData}
-        questionNumber={id + 1}
         setQuizQuestionsData={setQuizQuestionsData}
         isCheckingAnswers={isCheckingAnswers}
       />

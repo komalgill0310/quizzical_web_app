@@ -1,5 +1,6 @@
 import React from "react";
 import { nanoid } from "nanoid";
+
 import styles from "./Answer.module.css";
 
 export default function Answers(props) {
@@ -12,31 +13,36 @@ export default function Answers(props) {
     isCheckingAnswers,
   } = props;
 
-  function handleChange(e, i) {
+  function handleAnswerSelection(e, selectedAnswerIndex) {
     if (!isCheckingAnswers) {
       setQuizQuestionsData((prevState) => {
-        const updatedQuizAnswers = prevState.map((data, dataIndex) => {
-          if (dataIndex === questionIndex) {
-            const updateData = data.answers.map((answerObj, answerIndex) => {
-              if (answerIndex === i) {
-                return { ...answerObj, isSelected: true };
-              } else {
-                return { ...answerObj, isSelected: false };
+        return prevState.map((questionData, questionDataIndex) => {
+          // Check if this is the question we want to update
+          if (questionDataIndex === questionIndex) {
+            const updateQuestionData = questionData.answers.map(
+              (answerObject, answerIndex) => {
+                // Check if this is the answer we want to select
+                if (answerIndex === selectedAnswerIndex) {
+                  return { ...answerObject, isSelected: true };
+                } else {
+                  return { ...answerObject, isSelected: false };
+                }
               }
-            });
-            return { ...data, answers: updateData };
+            );
+            // Update the answers for the current question
+            return { ...questionData, answers: updateQuestionData };
           } else {
-            return { ...data };
+            // Keep other questions unchanged
+            return { ...questionData };
           }
         });
-        return updatedQuizAnswers;
       });
     }
   }
 
-  const answerElements = answers.map((answerObj, i) => {
+  const answerElements = answers.map((answerObject, answerIndex) => {
     const inputId = nanoid();
-    const { decodedAnswer, backgroundColor } = answerObj;
+    const { decodedAnswer, backgroundColor } = answerObject;
     return (
       <div
         key={nanoid()}
@@ -49,11 +55,14 @@ export default function Answers(props) {
           name={question}
           value={decodedAnswer}
           checked={
-            quizQuestionsData[questionIndex]["answers"][i]["isSelected"] &&
-            quizQuestionsData[questionIndex]["answers"][i]["decodedAnswer"] ===
-              decodedAnswer
+            quizQuestionsData[questionIndex]["answers"][answerIndex][
+              "isSelected"
+            ] &&
+            quizQuestionsData[questionIndex]["answers"][answerIndex][
+              "decodedAnswer"
+            ] === decodedAnswer
           }
-          onChange={(e) => handleChange(e, i)}
+          onChange={(e) => handleAnswerSelection(e, answerIndex)}
           className={styles.radioBtn}
         />
         <label htmlFor={inputId} className={styles.label}>

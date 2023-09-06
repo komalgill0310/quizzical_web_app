@@ -10,7 +10,7 @@ export default function Quiz(props) {
 
   const { quizData, setquizData } = props;
   const [quizQuestionsData, setQuizQuestionsData] = useState([]);
-  const [isCheckingAnswers, setisCheckingAnswers] = useState(false);
+  const [isCheckingAnswers, setIsCheckingAnswers] = useState(false);
 
   const { category, difficulty } = quizData[0];
 
@@ -23,7 +23,7 @@ export default function Quiz(props) {
       return quizData.map((data, index) => {
         // Using snake_case to maintain consistency with the original naming convention from the API
         const { incorrect_answers, correct_answer, question } = data;
-        const randomIndex = createRandomNumber();
+        const randomIndex = generateRandomIndex();
         const answers = incorrect_answers.toSpliced(
           randomIndex,
           0,
@@ -53,41 +53,47 @@ export default function Quiz(props) {
 
   function toggleCheckAnswersAndReset() {
     if (!isCheckingAnswers) {
-      setQuizQuestionsData((prevState) => {
-        const updatedQuizAnswers = prevState.map((data, i) => {
-          const { correct_answer } = quizQuestionsData[i];
-          const answersArr = quizQuestionsData[i]["answers"];
-          const updatedAnswersArr = answersArr.map((answerObj) => {
-            const { decodedAnswer, isSelected } = answerObj;
-            let updatedAnswerObj;
-            if (
-              (isSelected || !isSelected) &&
-              decodedAnswer === correct_answer
-            ) {
-              updatedAnswerObj = {
-                ...answerObj,
-                isCorrect: true,
-                backgroundColor: "green",
-              };
-            } else if (isSelected && decodedAnswer != correct_answer) {
-              updatedAnswerObj = { ...answerObj, backgroundColor: "red" };
-            } else {
-              updatedAnswerObj = { ...answerObj };
-            }
-            return updatedAnswerObj;
-          });
-          return { ...data, answers: updatedAnswersArr };
-        });
-        return updatedQuizAnswers;
-      });
-      setisCheckingAnswers((prevState) => !prevState);
+      checkAnswers();
+      setIsCheckingAnswers(true);
     } else {
-      setisCheckingAnswers((prevState) => !prevState);
-      setquizData([]);
+      resetQuiz();
     }
   }
 
-  function createRandomNumber() {
+  function checkAnswers() {
+    setQuizQuestionsData((prevState) => {
+      return prevState.map((data, i) => {
+        const { correct_answer } = quizQuestionsData[i];
+        const answerArray = quizQuestionsData[i]["answers"];
+
+        const updatedAnswersArr = answerArray.map((answerObj) => {
+          const { decodedAnswer, isSelected } = answerObj;
+
+          if ((isSelected || !isSelected) && decodedAnswer === correct_answer) {
+            // Marck selected/correct answer with green background
+            return {
+              ...answerObj,
+              isCorrect: true,
+              backgroundColor: "green",
+            };
+          } else if (isSelected && decodedAnswer !== correct_answer) {
+            // Mark selected/incorrect answer with red background
+            return { ...answerObj, backgroundColor: "red" };
+          }
+          // Leave other answers unchanged
+          return { ...answerObj };
+        });
+        return { ...data, answers: updatedAnswersArr };
+      });
+    });
+  }
+
+  function resetQuiz() {
+    setIsCheckingAnswers(false);
+    setquizData([]);
+  }
+
+  function generateRandomIndex() {
     return Math.floor(Math.random() * totalAnswers);
   }
 
@@ -107,6 +113,12 @@ export default function Quiz(props) {
     );
   });
 
+  const buttonText = isCheckingAnswers ? "Play again?" : "Check Answers";
+  const buttonClassName = isCheckingAnswers
+    ? "playAgainBtn"
+    : "checkAnswersBtn";
+  const commonClassName = styles.actionButton;
+
   return (
     <div className={styles.quizContainer}>
       <div className={styles.infoSection}>
@@ -115,10 +127,10 @@ export default function Quiz(props) {
       </div>
       {quizElements}
       <button
-        className={styles.checkAnswersBtn}
+        className={`${commonClassName} ${buttonClassName}`}
         onClick={toggleCheckAnswersAndReset}
       >
-        Check Answers
+        {buttonText}
       </button>
     </div>
   );

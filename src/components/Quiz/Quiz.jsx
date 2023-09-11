@@ -74,11 +74,11 @@ export default function Quiz(props) {
             return {
               ...answerObj,
               isCorrect: true,
-              backgroundColor: "green",
+              backgroundColor: "#94D7A2",
             };
           } else if (isSelected && decodedAnswer !== correct_answer) {
             // Mark selected/incorrect answer with red background
-            return { ...answerObj, backgroundColor: "red" };
+            return { ...answerObj, backgroundColor: "#F8BCBC" };
           }
           // Leave other answers unchanged
           return { ...answerObj };

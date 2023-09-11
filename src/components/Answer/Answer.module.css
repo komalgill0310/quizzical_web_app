@@ -1,3 +1,38 @@
 .multipleChoiceAnswers {
-  border: 2px solid green;
+  border-bottom: 1.5px solid #dbdef0;
+  padding-bottom: 15px;
+}
+
+.radioAnswerChoiceContainer {
+  margin-bottom: 16px;
+}
+
+.answerRadioButton {
+  display: none;
+}
+
+.answerChoiceLabel {
+  border-radius: 7.942px;
+  background-color: #e3e2e2;
+  color: #293264;
+  text-align: center;
+  font-family: Inter;
+  font-size: 14.75px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  padding: 7px 17px;
+  cursor: pointer;
+}
+
+.answerRadioButton:checked + .answerChoiceLabel {
+  background: #d6dbf5;
+}
+
+@media (min-width: 700px) {
+  .multipleChoiceAnswers {
+    display: flex;
+    gap: 13px;
+    flex-wrap: wrap;
+  }
 }

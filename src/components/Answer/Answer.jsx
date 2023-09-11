@@ -44,11 +44,7 @@ export default function Answers(props) {
     const inputId = nanoid();
     const { decodedAnswer, backgroundColor } = answerObject;
     return (
-      <div
-        key={nanoid()}
-        style={{ backgroundColor }}
-        className={styles.radioAnswerChoiceContainer}
-      >
+      <div key={nanoid()} className={styles.radioAnswerChoiceContainer}>
         <input
           type="radio"
           id={inputId}
@@ -65,7 +61,11 @@ export default function Answers(props) {
           onChange={(e) => handleAnswerSelection(e, answerIndex)}
           className={styles.answerRadioButton}
         />
-        <label htmlFor={inputId} className={styles.answerChoiceLabel}>
+        <label
+          htmlFor={inputId}
+          style={{ backgroundColor }}
+          className={styles.answerChoiceLabel}
+        >
           {decodedAnswer}
         </label>
       </div>

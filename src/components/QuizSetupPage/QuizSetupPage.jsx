@@ -39,66 +39,72 @@ export default function QuizSetupPage(props) {
     <div className={styles.container}>
       <h1 className={styles.title}>Quizzical</h1>
       <p className={styles.info}>
-        Unleash Your Wisdom Journey! Explore Diverse Quizzes. Customize
-        Difficulty, Dive into Adventures. Triumph Awaits!
+        Embark on a Journey of Wisdom! Discover a World of Quizzes. Tailor Your
+        Challenge, Dive into Adventures, and Triumph Awaits! Choose from an
+        Array of Categories including General Knowledge, Books, Politics, and
+        More.
       </p>
 
       {/* Below HTML for quiz topic */}
-      <div className={styles.categoryContainer}>
-        <label htmlFor="category-select">Category </label>
-        <select
-          name="category"
-          id="category-select"
-          onChange={handleChange}
-          defaultValue="9"
-          className={`${styles.dropdownLabel} ${styles.category}`}
-        >
-          <option value="any category">Any Category</option>
-          <option value="9">General Knowledge</option>
-          <option value="10">Entertainment: Books</option>
-          <option value="11">Entertainment: Film</option>
-          <option value="12">Entertainment: Music</option>
-          <option value="13">Entertainment: Musicals & Theatres</option>
-          <option value="14">Entertainment: Television</option>
-          <option value="15">Entertainment: Video Games</option>
-          <option value="16">Entertainment: Board Games</option>
-          <option value="17">Science & Nature</option>
-          <option value="18">Science: Computers</option>
-          <option value="19">Science: Mathematics</option>
-          <option value="20">Mythology</option>
-          <option value="21">Sports</option>
-          <option value="22">Geography</option>
-          <option value="23">History</option>
-          <option value="24">Politics</option>
-          <option value="25">Art</option>
-          <option value="26">Celebrities</option>
-          <option value="27">Animals</option>
-          <option value="28">Vehicles</option>
-          <option value="29">Entertainment: Comics</option>
-          <option value="30">Science: Gadgets</option>
-          <option value="31">Entertainment: Japanese Anime & Manga</option>
-          <option value="32">Entertainment: Cartoon & Animations</option>
-        </select>
-      </div>
+      <form>
+        <div className={`${styles.dropDown} ${styles.categoryContainer}`}>
+          <label htmlFor="category-select" className={styles.categoryLabel}>
+            Category{" "}
+          </label>
+          <select
+            name="category"
+            id="category-select"
+            onChange={handleChange}
+            defaultValue="9"
+            className={styles.selectCategory}
+          >
+            <option value="any category">Any Category</option>
+            <option value="9">General Knowledge</option>
+            <option value="10">Entertainment: Books</option>
+            <option value="11">Entertainment: Film</option>
+            <option value="12">Entertainment: Music</option>
+            <option value="13">Entertainment: Musicals & Theatres</option>
+            <option value="14">Entertainment: Television</option>
+            <option value="15">Entertainment: Video Games</option>
+            <option value="16">Entertainment: Board Games</option>
+            <option value="17">Science & Nature</option>
+            <option value="18">Science: Computers</option>
+            <option value="19">Science: Mathematics</option>
+            <option value="20">Mythology</option>
+            <option value="21">Sports</option>
+            <option value="22">Geography</option>
+            <option value="23">History</option>
+            <option value="24">Politics</option>
+            <option value="25">Art</option>
+            <option value="26">Celebrities</option>
+            <option value="27">Animals</option>
+            <option value="28">Vehicles</option>
+            <option value="29">Entertainment: Comics</option>
+            <option value="30">Science: Gadgets</option>
+            <option value="31">Entertainment: Japanese Anime & Manga</option>
+            <option value="32">Entertainment: Cartoon & Animations</option>
+          </select>
+        </div>
 
-      {/* Below HTML for quiz difficulty level */}
-      <div className={styles.difficultyContainer}>
-        <label htmlFor="difficulty-select" className={styles.difficultyLabel}>
-          Difficulty
-        </label>
-        <select
-          name="difficulty"
-          id="difficulty-select"
-          onChange={handleChange}
-          defaultValue="easy"
-          className={styles.difficultyLevel}
-        >
-          <option value="any category">Any Difficulty</option>
-          <option value="easy">Easy</option>
-          <option value="medium">Medium</option>
-          <option value="hard">Hard</option>
-        </select>
-      </div>
+        {/* Below HTML for quiz difficulty level */}
+        <div className={`${styles.dropDown} ${styles.difficultyContainer}`}>
+          <label htmlFor="difficulty-select" className={styles.difficultyLabel}>
+            Difficulty
+          </label>
+          <select
+            name="difficulty"
+            id="difficulty-select"
+            onChange={handleChange}
+            defaultValue="easy"
+            className={styles.difficultyLevel}
+          >
+            <option value="any category">Any Difficulty</option>
+            <option value="easy">Easy</option>
+            <option value="medium">Medium</option>
+            <option value="hard">Hard</option>
+          </select>
+        </div>
+      </form>
 
       {/* Button to Start the quiz */}
       <button className={styles.startBtn} type="button" onClick={fetchQuizData}>

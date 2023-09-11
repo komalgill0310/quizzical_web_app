@@ -1,27 +1,3 @@
-.radioButton {
-  display: flex;
-  flex-direction: row;
-}
-
-.radioBtn {
-  display: none;
-}
-
-.label {
-  border-radius: 7.71px;
-  border: 0.771px solid #4d5b9e;
-  cursor: pointer;
-  color: #293264;
-  text-align: center;
-  font-family: Inter;
-  font-size: 17.24px;
-  font-style: normal;
-  font-weight: 500;
-  line-height: normal;
-  display: inline-block;
-}
-
-.radioBtn:checked + .label {
-  border-radius: 7.942px;
-  background: #d6dbf5;
+.multipleChoiceAnswers {
+  border: 2px solid green;
 }

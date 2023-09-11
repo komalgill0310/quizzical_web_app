@@ -72,5 +72,5 @@ export default function Answers(props) {
     );
   });
 
-  return <div>{answerElements}</div>;
+  return <div className="answers">{answerElements}</div>;
 }

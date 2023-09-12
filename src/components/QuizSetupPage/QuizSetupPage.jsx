@@ -1,8 +1,10 @@
 import React, { useState } from "react";
+
 import styles from "./QuizSetupPage.module.css";
 
 export default function QuizSetupPage(props) {
   const { setquizData } = props;
+
   const [selections, setSelections] = useState({
     category: "9",
     difficulty: "easy",

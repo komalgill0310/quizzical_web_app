@@ -9,17 +9,18 @@ export default function Quiz(props) {
   const totalAnswers = 4;
 
   const { quizData, setquizData } = props;
+  const { category, difficulty } = quizData[0];
+
   const [quizQuestionsData, setQuizQuestionsData] = useState([]);
   const [isCheckingAnswers, setIsCheckingAnswers] = useState(false);
-  const [totalCorrectAnswers, setTotalCorrectAnswers] = useState(0);
-  const { category, difficulty } = quizData[0];
+  const [correctAnswersCount, setCorrectAnswersCount] = useState(0);
 
   useEffect(() => {
     updateQuizQuestionsDataState(quizData);
   }, []);
 
   useEffect(() => {
-    calculateTotalCorrectAnswers();
+    calculateCorrectAnswersCount();
   }, [isCheckingAnswers]);
 
   function updateQuizQuestionsDataState(quizData) {
@@ -42,6 +43,16 @@ export default function Quiz(props) {
     });
   }
 
+  function calculateCorrectAnswersCount() {
+    const total = quizQuestionsData.reduce((total, quizData) => {
+      const correctSelectedAnswers = quizData.answers.filter(
+        (answer) => answer.isSelected && answer.isCorrect
+      );
+      return total + correctSelectedAnswers.length;
+    }, 0);
+    setCorrectAnswersCount(total);
+  }
+
   function decodeData(question, answers, correct_answer) {
     return {
       question: decode(question),
@@ -62,16 +73,6 @@ export default function Quiz(props) {
     } else {
       resetQuiz();
     }
-  }
-
-  function calculateTotalCorrectAnswers() {
-    const total = quizQuestionsData.reduce((total, quizData) => {
-      const correctSelectedAnswers = quizData.answers.filter(
-        (answer) => answer.isSelected && answer.isCorrect
-      );
-      return total + correctSelectedAnswers.length;
-    }, 0);
-    setTotalCorrectAnswers(total);
   }
 
   function checkAnswers() {
@@ -126,7 +127,7 @@ export default function Quiz(props) {
   }
 
   function showScores() {
-    return `You scored ${totalCorrectAnswers}/${quizQuestionsData.length} correct
+    return `You scored ${correctAnswersCount}/${quizQuestionsData.length} correct
     answers`;
   }
 

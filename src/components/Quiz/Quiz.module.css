@@ -17,6 +17,7 @@
   border-radius: 0.81em; /* Approximately 13px */
   height: auto;
   padding: 0.438em 0.813em; /* Approximately 7px 13px */
+  margin: 0;
 }
 
 .level {
@@ -56,4 +57,15 @@
 .actionButton:hover {
   background-color: #4d5b9e;
   box-shadow: 0px 0px 0.31em rgba(0, 0, 0, 0.25); /* Approximately 5px */
+}
+
+/* Media Queries */
+
+@media (max-width: 300px) {
+  .infoSection {
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-around;
+    gap: 0.81em; /* Approximately 13px */
+  }
 }

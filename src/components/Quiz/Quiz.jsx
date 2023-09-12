@@ -11,9 +11,10 @@ export default function Quiz(props) {
   const { quizData, setquizData } = props;
   const [quizQuestionsData, setQuizQuestionsData] = useState([]);
   const [isCheckingAnswers, setIsCheckingAnswers] = useState(false);
-
+  const [totalCorrectAnswers, setTotalCorrectAnswers] = useState(0);
   const { category, difficulty } = quizData[0];
 
+  console.log(quizQuestionsData);
   useEffect(() => {
     updateQuizQuestionsDataState(quizData);
   }, []);
@@ -55,9 +56,39 @@ export default function Quiz(props) {
     if (!isCheckingAnswers) {
       checkAnswers();
       setIsCheckingAnswers(true);
+      // countCorrectAnswers();
     } else {
       resetQuiz();
+      // Display text called: You scored total correct answers/ total questions correct answers
     }
+  }
+
+  useEffect(() => {
+    countCorrectAnswers();
+  }, [isCheckingAnswers]);
+
+  function countCorrectAnswers() {
+    console.log("count function");
+    // let total = 0;
+    // for (let i = 0; i < quizQuestionsData.length; i++) {
+    //   const answers = quizQuestionsData[i].answers;
+    //   for (let j = 0; j < answers.length; j++) {
+    //     console.log("answerObj: ", answers[j]);
+    //     const { isSelected, isCorrect } = answers[j];
+    //     if (isSelected && isCorrect) {
+    //       total++;
+    //     }
+    //   }
+    // }
+    // console.log("total: ", total);
+    const total = quizQuestionsData.reduce((total, quizData) => {
+      const current = quizData.answers.filter(
+        (answer) => answer.isSelected && answer.isCorrect
+      );
+      const length = current.length;
+      return total + (length ? length : 0);
+    }, 0);
+    console.log("total using arrow function: ", total);
   }
 
   function checkAnswers() {
@@ -65,24 +96,38 @@ export default function Quiz(props) {
       return prevState.map((data, i) => {
         const { correct_answer } = quizQuestionsData[i];
         const answerArray = quizQuestionsData[i]["answers"];
-
         const updatedAnswersArr = answerArray.map((answerObj) => {
           const { decodedAnswer, isSelected } = answerObj;
 
-          if ((isSelected || !isSelected) && decodedAnswer === correct_answer) {
-            // Marck selected/correct answer with green background
+          if (
+            answerArray.every((answer) => !answer.isSelected) &&
+            decodedAnswer === correct_answer
+          ) {
+            // Check if no answer is selected and the answer is correct
+            return {
+              ...answerObj,
+              isCorrect: true,
+              backgroundColor: "#5AAE77",
+            };
+          } else if (
+            (isSelected || !isSelected) &&
+            decodedAnswer === correct_answer
+          ) {
+            // Check if the answer is correct and either selected or not selected
             return {
               ...answerObj,
               isCorrect: true,
               backgroundColor: "#94D7A2",
             };
           } else if (isSelected && decodedAnswer !== correct_answer) {
-            // Mark selected/incorrect answer with red background
+            // Check if the answer is selected but incorrect
             return { ...answerObj, backgroundColor: "#F8BCBC" };
+          } else {
+            // Default case: return the answer object unchanged
+            return { ...answerObj };
           }
-          // Leave other answers unchanged
-          return { ...answerObj };
         });
+        // Update the answers array for the current question in the data
         return { ...data, answers: updatedAnswersArr };
       });
     });

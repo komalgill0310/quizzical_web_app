@@ -1,9 +1,9 @@
 .question {
   color: #293264;
   font-family: Karla;
-  font-size: 16px; /* 16px */
+  font-size: 1rem; /* 16px */
   font-style: normal;
   font-weight: 700;
   line-height: normal;
-  margin-bottom: 21px;
+  margin-bottom: 1.31em; /* Approximately 21px */
 }

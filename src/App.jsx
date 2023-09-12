@@ -9,13 +9,13 @@ function App() {
   const [quizData, setquizData] = useState([]);
 
   return (
-    <div className="app">
+    <>
       {quizData.length ? (
         <Quiz quizData={quizData} setquizData={setquizData} />
       ) : (
         <QuizSetupPage setquizData={setquizData} />
       )}
-    </div>
+    </>
   );
 }
 

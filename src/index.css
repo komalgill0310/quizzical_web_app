@@ -19,6 +19,7 @@ body {
   min-width: 320px;
   min-height: 100vh;
   background: #f5f7fb;
+  background: linear-gradient(180deg, #fffce6, #deebf8);
   padding: 0;
 }
 

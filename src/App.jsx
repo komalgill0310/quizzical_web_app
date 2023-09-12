@@ -2,8 +2,8 @@ import { useState } from "react";
 import React from "react";
 import "./App.css";
 
-import QuizSetupPage from "./components/QuizSetupPage/QuizSetupPage";
 import Quiz from "./components/Quiz/Quiz";
+import QuizSetupPage from "./components/QuizSetupPage/QuizSetupPage";
 
 function App() {
   const [quizData, setquizData] = useState([]);

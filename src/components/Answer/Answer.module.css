@@ -1,10 +1,10 @@
 .multipleChoiceAnswers {
-  border-bottom: 1.5px solid #dbdef0;
-  padding-bottom: 15px;
+  border-bottom: 0.09em solid #dbdef0; /* Approximately 1.5px */
+  padding-bottom: 0.94em; /* Approximately 15px */
 }
 
 .radioAnswerChoiceContainer {
-  margin-bottom: 16px;
+  margin-bottom: 1em; /* 16px */
 }
 
 .answerRadioButton {
@@ -12,16 +12,16 @@
 }
 
 .answerChoiceLabel {
-  border-radius: 7.942px;
+  border-radius: 0.5em; /* Approximately 7.942px */
   background-color: #e3e2e2;
   color: #293264;
   text-align: center;
   font-family: Inter;
-  font-size: 14.75px;
+  font-size: 0.92rem; /* Approximately 14.75px */
   font-style: normal;
   font-weight: 500;
   line-height: normal;
-  padding: 7px 17px;
+  padding: 0.44em 1.06em; /* Approximately 7px 17px */
   cursor: pointer;
 }
 
@@ -36,7 +36,7 @@
 @media (min-width: 700px) {
   .multipleChoiceAnswers {
     display: flex;
-    gap: 13px;
+    gap: 0.81em; /* Approximately 13px */
     flex-wrap: wrap;
   }
 }

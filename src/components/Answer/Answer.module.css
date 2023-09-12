@@ -25,6 +25,10 @@
   cursor: pointer;
 }
 
+.answerChoiceLabel:hover {
+  background-color: #d6dbf5;
+}
+
 .answerRadioButton:checked + .answerChoiceLabel {
   background: #d6dbf5;
 }

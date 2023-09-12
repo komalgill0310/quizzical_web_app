@@ -14,10 +14,13 @@ export default function Quiz(props) {
   const [totalCorrectAnswers, setTotalCorrectAnswers] = useState(0);
   const { category, difficulty } = quizData[0];
 
-  console.log(quizQuestionsData);
   useEffect(() => {
     updateQuizQuestionsDataState(quizData);
   }, []);
+
+  useEffect(() => {
+    calculateTotalCorrectAnswers();
+  }, [isCheckingAnswers]);
 
   function updateQuizQuestionsDataState(quizData) {
     setQuizQuestionsData(() => {
@@ -56,39 +59,19 @@ export default function Quiz(props) {
     if (!isCheckingAnswers) {
       checkAnswers();
       setIsCheckingAnswers(true);
-      // countCorrectAnswers();
     } else {
       resetQuiz();
-      // Display text called: You scored total correct answers/ total questions correct answers
     }
   }
 
-  useEffect(() => {
-    countCorrectAnswers();
-  }, [isCheckingAnswers]);
-
-  function countCorrectAnswers() {
-    console.log("count function");
-    // let total = 0;
-    // for (let i = 0; i < quizQuestionsData.length; i++) {
-    //   const answers = quizQuestionsData[i].answers;
-    //   for (let j = 0; j < answers.length; j++) {
-    //     console.log("answerObj: ", answers[j]);
-    //     const { isSelected, isCorrect } = answers[j];
-    //     if (isSelected && isCorrect) {
-    //       total++;
-    //     }
-    //   }
-    // }
-    // console.log("total: ", total);
+  function calculateTotalCorrectAnswers() {
     const total = quizQuestionsData.reduce((total, quizData) => {
-      const current = quizData.answers.filter(
+      const correctSelectedAnswers = quizData.answers.filter(
         (answer) => answer.isSelected && answer.isCorrect
       );
-      const length = current.length;
-      return total + (length ? length : 0);
+      return total + correctSelectedAnswers.length;
     }, 0);
-    console.log("total using arrow function: ", total);
+    setTotalCorrectAnswers(total);
   }
 
   function checkAnswers() {
@@ -142,6 +125,11 @@ export default function Quiz(props) {
     return Math.floor(Math.random() * totalAnswers);
   }
 
+  function showScores() {
+    return `You scored ${totalCorrectAnswers}/${quizQuestionsData.length} correct
+    answers`;
+  }
+
   const quizElements = quizQuestionsData.map((eachQuizQuestionsData) => {
     const { id, question, answers } = eachQuizQuestionsData;
     return (
@@ -169,13 +157,19 @@ export default function Quiz(props) {
         <h3 className={styles.category}>{category}</h3>
         <h3 className={styles.level}>{difficulty}</h3>
       </div>
+      {/* Renders quiz questions and answers on the DOM  */}
       {quizElements}
-      <button
-        className={`${commonClassName} ${buttonClassName}`}
-        onClick={toggleCheckAnswersAndReset}
-      >
-        {buttonText}
-      </button>
+      <div className={styles.quizResultsContainer}>
+        {isCheckingAnswers && (
+          <p className={styles.quizScore}>{showScores()}</p>
+        )}
+        <button
+          className={`${commonClassName} ${buttonClassName}`}
+          onClick={toggleCheckAnswersAndReset}
+        >
+          {buttonText}
+        </button>
+      </div>
     </div>
   );
 }

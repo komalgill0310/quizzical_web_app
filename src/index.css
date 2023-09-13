@@ -14,7 +14,7 @@
 
 body {
   background: #f5f7fb;
-  background: linear-gradient(180deg, #fffce6, #deebf8);
+  background: linear-gradient(155deg, #fffce6, #deebf8);
   display: flex;
   margin: 0;
   min-height: 100vh;
@@ -29,4 +29,10 @@ h1 {
 
 button {
   cursor: pointer;
+}
+
+@media (min-width: 700px) {
+  html {
+    font-size: 21px;
+  }
 }

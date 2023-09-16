@@ -18,9 +18,8 @@ export default function QuizSetupPage(props) {
   }
 
   async function fetchQuizData() {
-    // const apiUrl = process.env.VITE_REACT_APP_API_URL;
     const apiUrl = import.meta.env.VITE_REACT_APP_API_URL;
-    // console.log("apiUrl: ", apiUrl);
+    console.log("apiUrl: ", apiUrl);
     const endPoints = buildApiEndpoints();
     const response = await fetch(`${apiUrl}?amount=5&${endPoints}`);
     const data = await response.json();

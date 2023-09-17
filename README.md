@@ -6,6 +6,48 @@ The Quizzical project offers users an interactive and educational quiz experienc
 
 - _**Engaging Learning**_: Quizzical promotes continuous learning by enabling users to restart quizzes with different topics or the same subject and choose their preferred difficulty level for each session
 
+## Getting Started
+
+- _**Prerequisites**_
+
+  - Node.js and npm (Node Package Manager) should be installed on your local machine.
+
+- _**Installation**_
+
+  - **Clone the Repository**:
+
+    1. Open your terminal/command prompt.
+    2. Navigate to the directory where you want to clone the project.
+    3. Run the following command to clone the Quizzical repository:
+
+       `git clone <repository-url>`
+
+    4. Replace <repository-url> with the actual URL of the Quizzical project's Git repository.
+
+  - **Navigate to the Project Directory**:
+
+    1. Change your current working directory to the Quizzical project directory:
+
+       `cd quizzical`
+
+  - **Install Dependencies**:
+
+    1. Once you are inside the project directory, run the following command to install the project's dependencies using npm:
+
+       `npm install`
+
+  - **Start the Development Server**:
+
+    1. After the dependencies are installed, you can start the development server. Use the following command:
+
+       `npm run dev`
+
+  - **Access the Application**:
+
+    1. Once the development server is running, you can access the Quizzical application in your web browser by opening the following URL:
+
+       `http://localhost:3000`
+
 ## Features
 
 - _**Topic Selection**_: Users choose from various topics to tailor their quiz experience.

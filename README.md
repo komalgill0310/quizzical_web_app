@@ -83,4 +83,4 @@ These dependencies are essential for the functionality and performance of the Qu
 
 # Author
 
-<font size=5>Komal - | Software Developer | [Quizzical](https://quizzical03.netlify.app/) | [LinkedIn](https://www.linkedin.com/in/hssa03/)
+<font size=5>Komal | Software Developer | [Quizzical](https://quizzical03.netlify.app/) | [LinkedIn](https://www.linkedin.com/in/hssa03/)

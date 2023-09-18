@@ -54,7 +54,7 @@ The Quizzical project offers users an interactive and educational quiz experienc
 
     1. Once the development server is running, you can access the Quizzical application in your web browser by opening the following URL:
 
-       `http://localhost:3000`
+       `http://localhost:5173/`
 
 ## Features
 

@@ -67,3 +67,14 @@ The Quizzical project offers users an interactive and educational quiz experienc
 - _**Play Again Option**_: After checking their answers, users can opt to "Play again?" by clicking the button, allowing them to restart the quiz.
 
 - _**Scoring Feedback**_: The app provides users with feedback on how many of their answers were correct out of the total quiz questions, allowing them to gauge their performance.
+
+## Dependencies
+
+Quizzical relies on the following external libraries and packages:
+
+- [dotenv](https://www.npmjs.com/package/dotenv) (^16.3.1): A module for loading environment variables from a .env file into process.env.
+- [html-entities](https://www.npmjs.com/package/html-entities) (^2.4.0): A library for encoding and decoding HTML entities in JavaScript.
+- [react](https://reactjs.org/) (^18.2.0): The core React library for building user interfaces.
+- [react-dom](https://reactjs.org/docs/react-dom.html) (^18.2.0): The React DOM-specific library for rendering React components into the DOM.
+
+These dependencies are essential for the functionality and performance of the Quizzical project. You can click on each dependency name to access its documentation or additional information.

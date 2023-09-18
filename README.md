@@ -1,12 +1,18 @@
 # **Quizzical**
 
-<font size=5> Live Version **_[here](https://quizzical03.netlify.app/)_**</font>
-
-## Overview
+# Overview
 
 The Quizzical project offers users an interactive and educational quiz experience across a diverse array of topics. Its primary objectives are to provide:
 
 - _**Engaging Learning**_: Quizzical promotes continuous learning by enabling users to restart quizzes with different topics or the same subject and choose their preferred difficulty level for each session
+
+# Website
+
+<font size=5> Live Version **_[here](https://quizzical03.netlify.app/)_**</font>
+
+# Preview
+
+<img src = "src\quizzical_gif.gif">
 
 ## Getting Started
 

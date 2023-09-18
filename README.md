@@ -80,3 +80,7 @@ Quizzical relies on the following external libraries and packages:
 - [react-dom](https://reactjs.org/docs/react-dom.html) (^18.2.0): The React DOM-specific library for rendering React components into the DOM.
 
 These dependencies are essential for the functionality and performance of the Quizzical project. You can click on each dependency name to access its documentation or additional information.
+
+# Author
+
+<font size=5>Komal - | Software Developer | [Quizzical](https://quizzical03.netlify.app/) | [LinkedIn](https://www.linkedin.com/in/hssa03/)
